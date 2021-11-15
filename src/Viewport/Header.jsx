@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import { Link as ActionLink } from 'react-router-dom';
 import ButtonGroup from '@mui/material/ButtonGroup';
+import Menu from '@mui/material/Menu';
 
 import { HomeIcon } from '../Icons';
 import { maxWidth } from '@mui/system';
@@ -31,8 +32,13 @@ const labels = [
 
 export const Header = () => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const handleClick = (e) => { setAnchorEl(e.currentTarget); };
-    const handleClose = () => { setAnchorEl(null); };
+    const open = Boolean(anchorEl);
+    const handleClick = (e) => {
+        setAnchorEl(e.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
 
     return (
@@ -70,8 +76,9 @@ export const Header = () => {
                             alignItems="center"
                         >
                             <Button
+                                color="inherit"
                                 onClick={handleClick}
-                                startIcon={<MenuIcon />}  >
+                                startIcon={<MenuIcon color="primary" />}  >
                                 Menu
                             </Button>
                             <Link component={ActionLink} sx={{ '& svg': { fontSize: '2.5rem' } }} to="/">
@@ -80,6 +87,25 @@ export const Header = () => {
                             <Button component={ActionLink} to="/login" variant="text">
                                 Login
                             </Button>
+                            <Menu
+                                id="demo-positioned-menu"
+                                aria-labelledby="demo-positioned-button"
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleClose}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                            >
+                                {MenuItems.map((p, index) =>
+                                    <MenuItem key={index} onClick={handleClose}>{p.label}</MenuItem>
+                                )}
+                            </Menu>
                         </Grid>
                     </Hidden>
                 </Toolbar>
