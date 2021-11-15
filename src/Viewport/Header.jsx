@@ -39,26 +39,26 @@ export const Header = () => {
             <Toolbar sx={{
                 // mx: 2,
                 display: 'flex',
-                justifyContent: 'center'
+                justifyContent: { sm: 'center' }
             }}>
                 <Box>
-                    <Box sx={{ display: 'flex', mb: 1, p: '1rem', height: '4rem' }}>
-                        <Hidden smDown>
+                    <Hidden smDown>
+                        <Box sx={{ display: 'flex', mb: 1, p: '1rem', height: '4rem' }}>
                             <Link component={ActionLink} sx={{ display: 'flex', '& svg': { fontSize: '3rem' }, flexGrow: 1 }} to="/">
                                 <HomeIcon />
                             </Link>
-
-                            <ButtonGroup color="inherit" size="small" variant="text">
-                                {labels.map((p, i) =>
-                                    <Button key={i}>
-                                        {p.label}
-                                    </Button>)}
-                            </ButtonGroup>
-                        </Hidden>
-                        <Button sx={{ ml: 1 }} variant="contained">
-                            Login
-                        </Button>
-                    </Box>
+                            <Hidden smDown>
+                                <ButtonGroup color="inherit" size="small" variant="text">
+                                    {labels.map((p, i) =>
+                                        <Button key={i}>
+                                            {p.label}
+                                        </Button>)}
+                                </ButtonGroup>
+                            </Hidden>
+                            <Button sx={{ ml: 1 }} variant="contained">
+                                Login
+                            </Button>
+                        </Box></Hidden>
                     <Stack direction="row"
                         justifyContent="center"
                         alignItems="center"
