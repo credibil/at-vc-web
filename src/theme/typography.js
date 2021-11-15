@@ -6,20 +6,20 @@ export const typography = {
 
     h1: {
         fontWeight: 700,
-        fontSize: '1.875rem',
+        fontSize: '3.875rem',
         lineHeight: 1.2,
         color: '#0C1451',
     },
     h2: {
         fontWeight: 800,
-        fontSize: '1.5rem',
+        fontSize: '3.5rem',
         lineHeight: 1.21,
         letterSpacing: '0.022em',
         color: '#0C1451',
     },
     h3: {
         fontWeight: 800,
-        fontSize: '1.125rem',
+        fontSize: '2.125rem',
         lineHeight: 1.125,
         letterSpacing: '0.025em',
         // color: '#0C1451',

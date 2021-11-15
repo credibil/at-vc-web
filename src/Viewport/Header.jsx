@@ -37,7 +37,6 @@ export const Header = () => {
     return (
         <AppBar elevation={1} position="static" sx={{ padding: 1 }} color="transparent" data-cy="header">
             <Toolbar sx={{
-                // mx: 2,
                 display: 'flex',
                 justifyContent: { sm: 'center' }
             }}>
@@ -55,7 +54,7 @@ export const Header = () => {
                                         </Button>)}
                                 </ButtonGroup>
                             </Hidden>
-                            <Button sx={{ ml: 1 }} variant="contained">
+                            <Button sx={{ ml: 1 }} href="/login" variant="contained">
                                 Login
                             </Button>
                         </Box></Hidden>
