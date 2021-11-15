@@ -22,7 +22,7 @@ export const typography = {
         fontSize: '1.125rem',
         lineHeight: 1.125,
         letterSpacing: '0.025em',
-        color: '#0C1451',
+        // color: '#0C1451',
     },
     h4: {
         fontWeight: 600,
@@ -68,6 +68,7 @@ export const typography = {
         fontWeight: 600,
         fontSize: '0.875rem',
         letterSpacing: '0.014em',
+        textTransform: 'none'
     },
     caption: {
         fontWeight: 400,
@@ -75,14 +76,4 @@ export const typography = {
         lineHeight: 1.07,
         letterSpacing: '0.017em',
     },
-    // TODO: Check usage. No design provided for this style.
-    // overline: {
-    //     fontWeight: 600,
-    //     fontSize: '0.875rem',
-    //     lineHeight: 1,
-    //     letterSpacing: '0.0286em',
-    //     textTransform: 'uppercase',
-    // },
 };
-
-export default typography;
