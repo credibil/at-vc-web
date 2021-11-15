@@ -26,7 +26,7 @@ export const typography = {
     },
     h4: {
         fontWeight: 600,
-        fontSize: '0.875rem',
+        fontSize: '1.5rem',
         lineHeight: 1.43,
         color: '#0C1451',
     },
