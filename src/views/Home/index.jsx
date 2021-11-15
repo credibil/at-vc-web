@@ -18,13 +18,16 @@ export const Home = () => {
         <Grid spacing={4} container>
             <Grid item xs={12} sm={6}>
                 <Box sx={{
-                    width: '100%',
+                    // width: '100%',
                     height: 300,
                     backgroundColor: 'primary.dark',
                 }}>
-                    <ButtonGroup color="inherit" variant="text" >
+                    <ButtonGroup sx={{ width: '100%' }} color="inherit" variant="text">
                         {tabArray.map((item, i) =>
-                            <Button sx={value === item.value ? { color: 'background.paper' } : { color: 'text.secondary' }} onClick={() => (setValue(item.value))} key={i}>{item.label}</Button>)}
+                            <Box component="span" sx={value === item.value ? { p: 2, color: 'background.paper', borderRadius: 0 } : { p: 2, backgroundColor: 'background.paper', borderRadius: 0 }}>
+                                <Button onClick={() => (setValue(item.value))} key={i}>{item.label}</Button>
+                            </Box>
+                        )}
                     </ButtonGroup>
                     {tabArray.map((item, i) => value === item.value &&
                         <Box key={i} sx={{ color: 'background.default' }}>

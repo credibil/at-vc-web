@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Hidden from '@mui/material/Hidden';
-import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import { Link as ActionLink } from 'react-router-dom';
-import { ButtonGroup, Typography } from '@mui/material';
+import ButtonGroup from '@mui/material/ButtonGroup';
+
 import { HomeIcon } from '../Icons';
+import { maxWidth } from '@mui/system';
+import { Container } from '@mui/material';
 
 const MenuItems = [
     { label: 'Bus Train Ferry', link: '/' },
@@ -35,50 +36,54 @@ export const Header = () => {
 
 
     return (
-        <AppBar elevation={1} position="static" sx={{ padding: 1 }} color="transparent" data-cy="header">
-            <Toolbar sx={{
-                display: 'flex',
-                justifyContent: { sm: 'center' }
-            }}>
-                <Box>
-                    <Hidden smDown>
-                        <Box sx={{ display: 'flex', mb: 1, p: '1rem', height: '4rem' }}>
-                            <Link component={ActionLink} sx={{ display: 'flex', '& svg': { fontSize: '3rem' }, flexGrow: 1 }} to="/">
+        <AppBar elevation={1} position="static" sx={{ padding: 1, }} color="transparent" data-cy="header">
+            <Container maxwidth="lg">
+                <Hidden mdDown>
+                    <Toolbar sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', mb: 1, mx: 4, height: '4rem' }}>
+                        <Link component={ActionLink} sx={{ display: 'flex', '& svg': { fontSize: '3rem' }, flexGrow: 1 }} to="/">
+                            <HomeIcon />
+                        </Link>
+                        <ButtonGroup color="inherit" size="small" variant="text">
+                            {labels.map((p, i) =>
+                                <Button key={i}>
+                                    {p.label}
+                                </Button>)}
+                        </ButtonGroup>
+                        <Button component={ActionLink} sx={{ ml: 1 }} to="/login" variant="contained">
+                            Login
+                        </Button>
+                    </Toolbar>
+                </Hidden>
+                <Toolbar sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                    <Hidden mdDown>
+                        {MenuItems.map((p, index) =>
+                            <Button size="large" data-ele={p.label && p.label.toLowerCase()} component={ActionLink} key={index} to={p.link}>
+                                {p.label}
+                            </Button>
+                        )}
+                    </Hidden>
+                    <Hidden mdUp>
+                        <Grid
+                            container
+                            direction="row"
+                            justifyContent="space-between"
+                            alignItems="center"
+                        >
+                            <Button
+                                onClick={handleClick}
+                                startIcon={<MenuIcon />}  >
+                                Menu
+                            </Button>
+                            <Link component={ActionLink} sx={{ '& svg': { fontSize: '2.5rem' } }} to="/">
                                 <HomeIcon />
                             </Link>
-                            <Hidden smDown>
-                                <ButtonGroup color="inherit" size="small" variant="text">
-                                    {labels.map((p, i) =>
-                                        <Button key={i}>
-                                            {p.label}
-                                        </Button>)}
-                                </ButtonGroup>
-                            </Hidden>
-                            <Button sx={{ ml: 1 }} href="/login" variant="contained">
+                            <Button component={ActionLink} to="/login" variant="text">
                                 Login
                             </Button>
-                        </Box></Hidden>
-                    <Stack direction="row"
-                        justifyContent="center"
-                        alignItems="center"
-                    >
-                        <Hidden smDown>
-                            {MenuItems.map((p, index) =>
-                                <Button sx={{ mx: 1 }} data-ele={p.label && p.label.toLowerCase()} component={ActionLink} key={index} to={p.link}>
-                                    {p.label}
-                                </Button>
-                            )}
-                        </Hidden>
-                        <Hidden smUp>
-                            <IconButton
-                                onClick={handleClick}>
-                                <MenuIcon />
-                            </IconButton>
-                            <Typography>Menu</Typography>
-                        </Hidden>
-                    </Stack>
-                </Box>
-            </Toolbar>
+                        </Grid>
+                    </Hidden>
+                </Toolbar>
+            </Container>
         </AppBar>
 
     );
