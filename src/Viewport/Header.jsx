@@ -37,24 +37,25 @@ export const Header = () => {
     return (
         <AppBar elevation={1} position="static" sx={{ padding: 1 }} color="transparent" data-cy="header">
             <Toolbar sx={{
-                mx: 4,
+                // mx: 2,
                 display: 'flex',
                 justifyContent: 'center'
             }}>
                 <Box>
-                    <Box sx={{ display: 'flex', p: '1rem' }}>
-                        <Link component={ActionLink} sx={{ display: 'flex', '& svg': { fontSize: '3rem' }, flexGrow: 1 }} to="/">
-                            <HomeIcon />
-                        </Link>
+                    <Box sx={{ display: 'flex', mb: 1, p: '1rem', height: '4rem' }}>
                         <Hidden smDown>
-                            <ButtonGroup size="small" variant="text">
+                            <Link component={ActionLink} sx={{ display: 'flex', '& svg': { fontSize: '3rem' }, flexGrow: 1 }} to="/">
+                                <HomeIcon />
+                            </Link>
+
+                            <ButtonGroup color="inherit" size="small" variant="text">
                                 {labels.map((p, i) =>
-                                    <Button color="inherit" key={i}>
+                                    <Button key={i}>
                                         {p.label}
                                     </Button>)}
                             </ButtonGroup>
                         </Hidden>
-                        <Button variant="contained">
+                        <Button sx={{ ml: 1 }} variant="contained">
                             Login
                         </Button>
                     </Box>
