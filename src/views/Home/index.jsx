@@ -2,33 +2,40 @@ import React, { useState } from 'react';
 
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
+import RoomIcon from '@mui/icons-material/Room';
+import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
+import DepartureBoardIcon from '@mui/icons-material/DepartureBoard';
 
-const tabArray = [
-    { label: "Journey Planner", icon: '', value: '1' },
-    { label: "Live Departures", icon: '', value: '2' },
-    { label: "Timetables", icon: '', value: '3' },
-]
+
 
 export const Home = () => {
     const [value, setValue] = useState('1');
+    const tabArray = [
+        { label: "Journey Planner", icon: <RoomIcon />, value: '1' },
+        { label: "Live Departures", icon: <DepartureBoardIcon />, value: '2' },
+        { label: "Timetables", icon: <ListAltOutlinedIcon />, value: '3' },
+    ]
 
     return (
         <Grid spacing={4} container>
             <Grid item xs={12} sm={6}>
                 <Box sx={{
-                    // width: '100%',
                     height: 300,
                     backgroundColor: 'primary.dark',
                 }}>
-                    <ButtonGroup sx={{ width: '100%' }} color="inherit" variant="text">
+                    <Box sx={{ width: '100%', display: 'flex' }} color="inherit" >
                         {tabArray.map((item, i) =>
-                            <Box component="span" sx={value === item.value ? { p: 2, color: 'background.paper', borderRadius: 0 } : { p: 2, backgroundColor: 'background.paper', borderRadius: 0 }}>
-                                <Button onClick={() => (setValue(item.value))} key={i}>{item.label}</Button>
-                            </Box>
+                            <Grid container
+                                key={i}
+                                direction="column"
+                                justifyContent="center"
+                                onClick={() => (setValue(item.value))}
+                                alignItems="center" sx={value === item.value ? { p: 2, color: 'background.paper', borderRadius: 0 } : { p: 2, backgroundColor: 'background.paper', '&:hover': { cursor: 'pointer' }, borderRadius: 0, '& svg': { color: 'primary.main' } }}>
+                                {item.icon}
+                                <Box sx={{ typography: "button", mt: 2 }}  >{item.label}</Box>
+                            </Grid>
                         )}
-                    </ButtonGroup>
+                    </Box>
                     {tabArray.map((item, i) => value === item.value &&
                         <Box key={i} sx={{ color: 'background.default' }}>
                             {item.label}
@@ -41,7 +48,6 @@ export const Home = () => {
                 <Box sx={{ typography: 'h3', pb: 2 }} > Welcome to AT</Box>
                 <Box sx={{ typography: 'body1', width: '85%' }} > AT is responsible for all the region's transport services, from roads and footpaths, to cycling, parking and public transport.</Box>
             </Grid>
-
         </Grid>
     )
 }

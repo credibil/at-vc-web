@@ -1,8 +1,8 @@
 export const palette = {
     primary: {
         main: '#3365a3',
-        light: '#5fa3da'
-        // 200: 'red'
+        light: '#5fa3da',
+        dark: '#2c384c'
         // contrastText: '#FFFFFF',
     },
     secondary: {
