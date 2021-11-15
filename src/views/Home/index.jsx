@@ -26,21 +26,11 @@ export const Home = () => {
                         {tabArray.map((item, i) =>
                             <Button sx={value === item.value ? { color: 'background.paper' } : { color: 'text.secondary' }} onClick={() => (setValue(item.value))} key={i}>{item.label}</Button>)}
                     </ButtonGroup>
-                    {value === '1' &&
-                        <Box>
-                            Item One
+                    {tabArray.map((item, i) => value === item.value &&
+                        <Box key={i} sx={{ color: 'background.default' }}>
+                            {item.label}
                         </Box>
-                    }
-                    {value === '2' &&
-                        <Box>
-                            Item Two
-                        </Box>
-                    }
-                    {value === '3' &&
-                        <Box >
-                            Item Three
-                        </Box>
-                    }
+                    )}
                 </Box>
             </Grid>
             <Grid item xs={12} sm={6}>
