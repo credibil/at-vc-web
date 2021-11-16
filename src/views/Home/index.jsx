@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import { styled } from '@mui/material/styles';
 import ButtonGroup from '@mui/material/ButtonGroup';
+import Typography from '@mui/material/Typography';
 import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 import TrainIcon from '@mui/icons-material/Train';
 import DirectionsBoatIcon from '@mui/icons-material/DirectionsBoat';
@@ -55,7 +56,7 @@ export const Home = () => {
                                     ? { p: 2, color: 'background.paper' }
                                     : { p: 2, backgroundColor: 'background.paper', '&:hover': { cursor: 'pointer' }, '& svg': { color: 'primary.main' } }}>
                                 {item.icon}
-                                <Box sx={{ typography: "button", mt: 2 }}>{item.label}</Box>
+                                <Typography variant="button" sx={{ mt: 2 }}>{item.label}</Typography>
                             </Grid>
                         )}
                     </Box>
@@ -75,13 +76,13 @@ export const Home = () => {
                     }
                     {value === '2' &&
                         <Box sx={{ color: 'background.default', p: 4 }}>
-                            <Box sx={{ typography: 'h5', pb: 2, color: "background.paper" }} > Search for a stop</Box>
+                            <Typography variant='h5' sx={{ pb: 2, color: "background.paper" }} > Search for a stop</Typography>
                             <TextInput fullWidth variant="filled" label="Location or stop number" />
                         </Box>
                     }
                     {value === '3' &&
                         <Box sx={{ color: 'background.default', p: 4 }}>
-                            <Box sx={{ typography: 'h5', pb: 2, color: "background.paper" }} > Transport mode</Box>
+                            <Typography variant='h5' sx={{ pb: 2, color: "background.paper" }} > Transport mode</Typography>
                             <ButtonGroup fullWidth color="inherit">
                                 {transportArray.map((item, i) =>
                                     <Button
@@ -99,7 +100,7 @@ export const Home = () => {
                             </ButtonGroup>
                             {transportArray.map((item, i) => item.value === transportVal &&
                                 <div key={i}>
-                                    <Box sx={{ typography: 'h5', color: "background.paper", pt: 4 }} >{item.description}</Box>
+                                    <Typography variant='h5' sx={{ color: "background.paper", pt: 4 }} >{item.description}</Typography>
                                     <TextInput fullWidth variant="filled" label={item.input} />
                                 </div>
                             )}
@@ -108,11 +109,11 @@ export const Home = () => {
                 </Box>
             </Grid>
             <Grid item xs={12} md={6}>
-                <Box sx={{ typography: 'h1', pb: 2 }} > Kia Ora Auckland,</Box>
-                <Box sx={{ typography: 'h3', pb: 2 }} > Welcome to AT</Box>
-                <Box sx={{ typography: 'body1', width: '85%' }} > AT is responsible for all the region's transport services, from roads and footpaths, to cycling, parking and public transport.</Box>
+                <Typography variant='h1' sx={{ pb: 2 }} > Kia Ora Auckland,</Typography>
+                <Typography variant='h3' sx={{ pb: 2 }} > Welcome to AT</Typography>
+                <Typography variant='body1' sx={{ width: '85%' }} > AT is responsible for all the region's transport services, from roads and footpaths, to cycling, parking and public transport.</Typography>
             </Grid>
-        </Grid>
+        </Grid >
     )
 }
 export default Home

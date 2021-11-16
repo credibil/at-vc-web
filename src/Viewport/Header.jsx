@@ -56,7 +56,7 @@ export const Header = () => {
                                 </Button>)}
                         </ButtonGroup>
                         <Button component={ActionLink} sx={{ ml: 1 }} to="/login" variant="contained">
-                            Login
+                            Log in
                         </Button>
                     </Toolbar>
                 </Hidden>
@@ -85,7 +85,7 @@ export const Header = () => {
                                 <HomeIcon />
                             </Link>
                             <Button component={ActionLink} to="/login" variant="text">
-                                Login
+                                Log in
                             </Button>
                             <Menu
                                 id="demo-positioned-menu"
