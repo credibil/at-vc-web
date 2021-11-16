@@ -23,6 +23,7 @@ export const Viewport = ({ children }) => {
             display: 'flex',
             flexDirection: 'column',
             minHeight: '100vh',
+            alignItems: 'center'
         }}
         >
             <Header />
@@ -31,7 +32,6 @@ export const Viewport = ({ children }) => {
                     {children}
                 </Container>
             </CustomBox>
-
             <Footer />
         </Box>
     );

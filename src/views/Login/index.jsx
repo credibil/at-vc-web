@@ -17,7 +17,7 @@ const TextInput = styled(TextField)({
 
 export const Login = () => {
     return (
-        <Box sx={{ backgroundColor: 'primary.dark', width: 500, p: 3 }}>
+        <Box sx={{ backgroundColor: 'primary.dark', width: 500, p: 3, borderRadius: 1 }}>
             <Box sx={{ display: 'flex', typography: 'h2', alignItems: 'center', color: 'background.paper' }}>
                 <HomeIcon sx={{ fontSize: 60, mr: 1 }} />
                 Log in

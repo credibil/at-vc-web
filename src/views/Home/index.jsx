@@ -41,55 +41,51 @@ export const Home = () => {
 
     return (
         <Grid spacing={4} container>
-            <Grid item xs={12} md={6}>
-                <Box sx={{ backgroundColor: 'primary.dark' }} color="inherit" >
-                    <Box sx={{ display: 'flex' }}>
-                        {tabArray.map((item, i) =>
-                            <Grid
-                                container
-                                key={i}
-                                direction="column"
-                                justifyContent="center"
-                                onClick={() => (setValue(item.value))}
-                                alignItems="center"
-                                sx={value === item.value
-                                    ? { p: 2, color: 'background.paper' }
-                                    : { p: 2, backgroundColor: 'background.paper', '&:hover': { cursor: 'pointer' }, '& svg': { color: 'primary.main' } }}>
-                                {item.icon}
-                                <Typography variant="button" sx={{ mt: 2 }}>{item.label}</Typography>
-                            </Grid>
-                        )}
-                    </Box>
-                    {value === '1' &&
-                        <Grid container>
-                            <Grid item xs={10} >
-                                <Box sx={{ color: 'background.default', p: 2 }}>
-                                    <TextInput fullWidth variant="filled" label="Chopose starting point" />
-                                    <TextInput fullWidth variant="filled" label="Chopose destination point" />
-                                    <Button size="large" disabled sx={{ my: 2 }} fullWidth variant="contained">Plan my journey</Button>
-                                </Box>
-                            </Grid>
-                            <Grid item xs={2} >
-                                <ImportExportIcon sx={{ position: 'relative', top: '30%', left: 10 }} color="primary" fontSize="large" />
-                            </Grid>
+            <Grid item xs={12} md={6} >
+                <Box sx={{ backgroundColor: 'primary.dark', display: 'flex' }}>
+                    {tabArray.map((item, i) =>
+                        <Grid
+                            container
+                            key={i}
+                            direction="column"
+                            onClick={() => (setValue(item.value))}
+                            alignItems="center"
+                            sx={value === item.value
+                                ? { p: 2, color: 'background.paper' }
+                                : { p: 2, backgroundColor: 'background.paper', '&:hover': { cursor: 'pointer' }, '& svg': { color: 'primary.main' } }}>
+                            {item.icon}
+                            <Typography variant="button" sx={{ mt: 2 }}>{item.label}</Typography>
                         </Grid>
-                    }
-                    {value === '2' &&
-                        <Box sx={{ color: 'background.default', p: 4 }}>
-                            <Typography variant='h5' sx={{ pb: 2, color: "background.paper" }} > Search for a stop</Typography>
-                            <TextInput fullWidth variant="filled" label="Location or stop number" />
+                    )}
+                </Box>
+                <Box sx={{ color: 'background.default', backgroundColor: 'primary.dark', p: 4 }}>
+                    {value === '1' &&
+                        <Box sx={{ display: 'flex' }}>
+                            <Box>
+                                <TextInput fullWidth variant="filled" label="Choose starting point" />
+                                <TextInput fullWidth variant="filled" label="Choose destination point" />
+                                <Button size="large" disabled sx={{ my: 2 }} fullWidth variant="contained">Plan my journey</Button>
+                            </Box>
+                            <ImportExportIcon sx={{ position: 'relative', top: 50, left: 10 }} color="primary" fontSize="large" />
                         </Box>
                     }
+                    {value === '2' &&
+                        <>
+                            <Typography variant='h5' sx={{ pb: 2, color: "background.paper" }} > Search for a stop</Typography>
+                            <TextInput fullWidth variant="filled" label="Location or stop number" />
+                        </>
+                    }
                     {value === '3' &&
-                        <Box sx={{ color: 'background.default', p: 4 }}>
-                            <Typography variant='h5' sx={{ pb: 2, color: "background.paper" }} > Transport mode</Typography>
+                        <>
+                            <Typography variant='h5' sx={{ pb: 2, color: "background.paper" }}>Transport mode</Typography>
                             <ButtonGroup fullWidth color="inherit">
                                 {transportArray.map((item, i) =>
                                     <Button
                                         sx={transportVal === item.value
                                             ? { '& svg': { color: 'background.paper' } }
                                             : {
-                                                backgroundColor: 'background.paper', '&:hover': { backgroundColor: 'background.paper' }, '& svg': { color: 'primary.dark' }
+                                                backgroundColor: 'background.paper', '&:hover': { backgroundColor: 'background.paper' },
+                                                '& svg': { color: 'primary.dark' }
                                             }}
                                         variant={transportVal === item.value ? 'outlined' : 'text'}
                                         onClick={() => (setTransportVal(item.value))}
@@ -99,12 +95,12 @@ export const Home = () => {
                                 )}
                             </ButtonGroup>
                             {transportArray.map((item, i) => item.value === transportVal &&
-                                <div key={i}>
+                                <Box key={i}>
                                     <Typography variant='h5' sx={{ color: "background.paper", pt: 4 }} >{item.description}</Typography>
                                     <TextInput fullWidth variant="filled" label={item.input} />
-                                </div>
+                                </Box>
                             )}
-                        </Box>
+                        </>
                     }
                 </Box>
             </Grid>
