@@ -15,6 +15,10 @@ const TextInput = styled(TextField)({
     backgroundColor: '#fff',
 });
 
+const Div = styled(Box)({
+    marginTop: '2rem',
+})
+
 export const Login = () => {
     return (
         <Box sx={{ backgroundColor: 'primary.dark', width: 500, p: 3, borderRadius: 1 }}>
@@ -25,6 +29,7 @@ export const Login = () => {
             <TextInput sx={{ mt: 5 }} fullWidth variant="filled" label="Email Address" />
             <TextInput fullWidth variant="filled" label="Password" />
             <Button sx={{ px: 3, mt: 2 }} color="primary" variant="contained">Log in</Button>
+            <Div sx={{ borderTop: 1, borderColor: 'grey.500' }} />
         </Box>
     )
 }
