@@ -46,6 +46,7 @@ export const Login = () => {
         fetchData();
     }, []);
 
+
     return (
         <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
             <Box sx={{ display: 'flex', typography: 'h2', alignItems: 'center', color: 'background.paper' }}>
@@ -68,6 +69,9 @@ export const Login = () => {
                     alt="qr code"
                 />
             </Dialog>
+            <Box sx={{ typography: 'body2', mt: 2, color: 'background.paper' }}>
+                Open QR code and scan with microsoft authenticator
+            </Box>
             <Button onClick={handleClickOpen}>Scan Here</Button>
         </Box>
     )
