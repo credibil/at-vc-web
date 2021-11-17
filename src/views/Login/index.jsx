@@ -22,6 +22,9 @@ export const Login = () => {
     const [qr, useQr] = useState([])
     const [dialogOpen, setDialogOpen] = useState(false);
 
+    const appUrl = `${config.url}/issuer/issuance`;
+    const reqInit = config.getReqInit;
+
     const handleClickOpen = () => {
         setDialogOpen(true);
     };
@@ -29,8 +32,6 @@ export const Login = () => {
     const handleDialogClose = () => {
         setDialogOpen(false);
     };
-    const appUrl = `${config.url}/issuer/issuance`;
-    const reqInit = config.getReqInit;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -42,10 +43,10 @@ export const Login = () => {
                 console.log("error", error);
             }
         };
-
         fetchData();
     }, []);
 
+    console.log(qr)
 
     return (
         <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
