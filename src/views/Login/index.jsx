@@ -18,7 +18,6 @@ const TextInput = styled(TextField)({
     backgroundColor: '#fff',
 });
 
-
 export const Login = () => {
     const [qr, useQr] = useState([])
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -48,14 +47,18 @@ export const Login = () => {
     }, []);
 
     return (
-        <Box sx={{ backgroundColor: 'primary.dark', width: 500, p: 3, borderRadius: 1 }}>
+        <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
             <Box sx={{ display: 'flex', typography: 'h2', alignItems: 'center', color: 'background.paper' }}>
                 <HomeIcon sx={{ fontSize: 60, mr: 1 }} />
                 Log in
             </Box>
             <TextInput sx={{ mt: 5 }} fullWidth variant="filled" label="Email Address" />
             <TextInput fullWidth variant="filled" label="Password" />
-            <Button sx={{ px: 3, mt: 2 }} color="primary" variant="contained">Log in</Button>
+            <Box sx={{ display: 'flex', mt: 2 }}>
+                <Button sx={{ px: 3 }} color="primary" variant="contained">Log in</Button>
+                <Button sx={{ mx: 1 }} color="primary" >Forgotten Password?</Button>
+                <Button sx={{ mx: 1 }} color="primary" >Create an account</Button>
+            </Box>
             <Box sx={{ mt: 4, borderTop: 1, borderColor: 'grey.500' }} />
             <Dialog fullWidth onClose={handleDialogClose} open={dialogOpen}>
                 <CardMedia

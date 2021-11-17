@@ -42,7 +42,7 @@ export const Home = () => {
     return (
         <Grid spacing={4} container>
             <Grid item xs={12} md={6} >
-                <Box sx={{ backgroundColor: 'primary.dark', display: 'flex' }}>
+                <Box sx={{ backgroundColor: 'secondary.main', display: 'flex' }}>
                     {tabArray.map((item, i) =>
                         <Grid
                             container
@@ -58,7 +58,7 @@ export const Home = () => {
                         </Grid>
                     )}
                 </Box>
-                <Box sx={{ color: 'background.default', backgroundColor: 'primary.dark', p: 4 }}>
+                <Box sx={{ color: 'background.default', backgroundColor: 'secondary.main', p: 4 }}>
                     {value === '1' &&
                         <Box sx={{ display: 'flex' }}>
                             <Box>
@@ -85,7 +85,7 @@ export const Home = () => {
                                             ? { '& svg': { color: 'background.paper' } }
                                             : {
                                                 backgroundColor: 'background.paper', '&:hover': { backgroundColor: 'background.paper' },
-                                                '& svg': { color: 'primary.dark' }
+                                                '& svg': { color: 'secondary.main' }
                                             }}
                                         variant={transportVal === item.value ? 'outlined' : 'text'}
                                         onClick={() => (setTransportVal(item.value))}

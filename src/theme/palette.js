@@ -2,12 +2,12 @@ export const palette = {
     primary: {
         main: '#3365a3',
         light: '#5fa3da',
-        dark: '#2c384c'
+        // dark: '#2c384c'
         // contrastText: '#FFFFFF',
     },
     secondary: {
         // main: '#a37133'
-        main: '#a33365'
+        main: '#2c384c'
         // contrastText: '#FFFFFF',
     },
     error: {
