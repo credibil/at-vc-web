@@ -18,12 +18,14 @@ const TextInput = styled(TextField)({
     backgroundColor: '#fff',
 });
 
-export const Login = () => {
-    const [qr, useQr] = useState([])
-    const [dialogOpen, setDialogOpen] = useState(false);
+const appUrl = `${config.url}/issuer/issuance`;
+const reqInit = config.getReqInit;
 
-    const appUrl = `${config.url}/issuer/issuance`;
-    const reqInit = config.getReqInit;
+
+export const Login = () => {
+    const [qr, useQr] = useState([]);
+    const [status, setStatus] = useState();
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     const handleClickOpen = () => {
         setDialogOpen(true);
@@ -47,6 +49,23 @@ export const Login = () => {
     }, []);
 
     console.log(qr)
+    console.log(qr.state)
+
+    const appStatus = `${config.url}/issuer/status/${qr.state}`;
+    useEffect(() => {
+        const fetchStatus = async () => {
+            try {
+                const response = await fetch(appStatus, reqInit);
+                const json = await response.json();
+                setStatus(json);
+            } catch (error) {
+                console.log("error", error);
+            }
+        };
+        fetchStatus();
+    }, [])
+
+    console.log(status)
 
     return (
         <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
