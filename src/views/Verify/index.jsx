@@ -1,4 +1,3 @@
-import { Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
@@ -9,7 +8,7 @@ import { config } from '../../config';
 
 export const Verify = () => {
     const [qr, useQr] = useState([])
-
+    const [status, setStatus] = useState();
     const appUrl = `${config.urlAlt}/verifier/presentation`;
     const reqInit = config.getReqInit;
 
@@ -26,8 +25,24 @@ export const Verify = () => {
         fetchData();
     }, []);
 
-    console.log(qr)
+    console.log("****", qr)
 
+
+    const appStatus = `${config.urlAlt}/verifier/status/${qr.state}`;
+    useEffect(() => {
+        const fetchState = async () => {
+            try {
+                const response = await fetch(appStatus, reqInit);
+                const json = await response.json();
+                setStatus(json);
+            } catch (error) {
+                console.log("error", error);
+            }
+        };
+        fetchState();
+    }, []);
+
+    console.log("STATUS", status)
     return (
         <Box>
 
@@ -40,7 +55,7 @@ export const Verify = () => {
                 />
             </Box>
             <Box sx={{ typography: 'h4', mt: 2 }}>
-                Scan QR code and Microsoft Authenticator
+                Scan QR code to verify yourself with Microsoft Authenticator
             </Box>
 
         </Box>
