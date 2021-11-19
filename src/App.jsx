@@ -8,6 +8,7 @@ import Viewport from './Viewport';
 import { custom } from './theme';
 import { Home } from './views/Home'
 import { Login } from './views/Login'
+import { Verify } from './views/Verify'
 
 let theme = createTheme(custom);
 theme = responsiveFontSizes(theme)
@@ -21,6 +22,7 @@ const App = () => {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
+            <Route exact path="/verify" element={<Verify />} />
           </Routes>
         </Viewport>
       </Router>
