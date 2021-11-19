@@ -10,12 +10,4 @@ export const config = {
             'Content-Type': 'application/json'
         },
     },
-    postReqInit: {
-        method: "POST",
-        mode: 'cors',
-        headers: {
-            Accept: 'application/ json',
-            'Content-Type': 'application/json'
-        },
-    }
 }

@@ -12,8 +12,6 @@ export const Verify = () => {
     const appUrl = `${config.urlAlt}/verifier/presentation`;
     const reqInit = config.getReqInit;
 
-
-
     useEffect(() => {
         const fetchData = async () => {
             try {

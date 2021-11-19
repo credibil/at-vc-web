@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -18,54 +18,61 @@ const TextInput = styled(TextField)({
     backgroundColor: '#fff',
 });
 
-const appUrl = `${config.url}/issuer/issuance`;
-const reqInit = config.getReqInit;
-
+var appUrl = `${config.url}/issuer/issuance`;
+var reqInit = config.getReqInit;
 
 export const Login = () => {
-    const [qr, useQr] = useState([]);
-    const [status, setStatus] = useState();
+    const [qr, useQr] = useLocalStorage([]);
+    const [status, setStatus] = useState([]);
     const [dialogOpen, setDialogOpen] = useState(false);
 
-    const handleClickOpen = () => {
+    function useLocalStorage(key) {
+        const [storedValue, setStoredValue] = useState(() => {
+            try {
+                const item = window.localStorage.getItem([]);
+                return item ? JSON.parse(item) : [];
+            } catch (error) {
+                return [];
+            }
+        });
+        const useQr = (value) => {
+            try {
+                const valueToStore = value instanceof Function ? value(storedValue) : value;
+                setStoredValue(valueToStore);
+                window.localStorage.setItem(key, JSON.stringify(valueToStore));
+            } catch (error) { }
+        };
+        return [storedValue, useQr];
+    }
+
+    const handleClickOpen = async () => {
         setDialogOpen(true);
+        try {
+            const response = await fetch(appUrl, reqInit);
+            const json = await response.json();
+            useQr(json);
+        } catch (error) {
+            console.log("error", error);
+        }
+        console.log(qr)
     };
 
     const handleDialogClose = () => {
         setDialogOpen(false);
     };
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(appUrl, reqInit);
-                const json = await response.json();
-                useQr(json);
-            } catch (error) {
-                console.log("error", error);
-            }
-        };
-        fetchData();
-    }, []);
+    const fetchStatus = async () => {
+        var appStatus = `${config.url}/issuer/status/${qr.state}`;
+        try {
+            const response = await fetch(appStatus, reqInit);
+            const json = await response.json();
+            setStatus(json);
+        } catch (error) {
+            console.log("error", error);
+        }
+    };
 
-    console.log(qr)
-    console.log(qr.state)
-
-    const appStatus = `${config.url}/issuer/status/${qr.state}`;
-    useEffect(() => {
-        const fetchStatus = async () => {
-            try {
-                const response = await fetch(appStatus, reqInit);
-                const json = await response.json();
-                setStatus(json);
-            } catch (error) {
-                console.log("error", error);
-            }
-        };
-        fetchStatus();
-    }, [])
-
-    console.log(status)
+    console.log(status.Status)
 
     return (
         <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
@@ -88,11 +95,13 @@ export const Login = () => {
                     image={qr.qrCode}
                     alt="qr code"
                 />
+                <Button onClick={() => fetchStatus()}>Verify</Button>
             </Dialog>
             <Box sx={{ typography: 'body2', mt: 2, color: 'background.paper' }}>
                 Open QR code and scan with microsoft authenticator
             </Box>
             <Button onClick={handleClickOpen}>Scan Here</Button>
+
         </Box>
     )
 }
