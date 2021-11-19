@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 
-import { HomeIcon } from '../../Icons';
-import { config } from '../../config';
+import { HomeIcon } from '@/Icons';
+import { config } from '@/config';
 
 const TextInput = styled(TextField)({
     marginTop: '0.5rem',
@@ -18,61 +17,41 @@ const TextInput = styled(TextField)({
     backgroundColor: '#fff',
 });
 
-var appUrl = `${config.url}/issuer/issuance`;
 var reqInit = config.getReqInit;
 
 export const Login = () => {
-    const [qr, useQr] = useLocalStorage([]);
-    const [status, setStatus] = useState([]);
-    const [dialogOpen, setDialogOpen] = useState(false);
+    const [qrCode, setQRCode] = useState("");
+    const [status, setStatus] = useState({});
 
-    function useLocalStorage(key) {
-        const [storedValue, setStoredValue] = useState(() => {
+    // get VC issuance request QR code
+    useEffect(() => {
+        let intervalId;
+
+        const requestVC = async () => {
             try {
-                const item = window.localStorage.getItem([]);
-                return item ? JSON.parse(item) : [];
+                const rsp = await fetch(`${config.url}/issuer/issuance`, reqInit);
+                const json = await rsp.json();
+                setQRCode(json.qrCode);
+                window.localStorage.setItem("state", JSON.stringify(json.state));
+
+                // set timer to check for state change (every 5 secs)
+                intervalId = setInterval(async () => {
+                    const state = window.localStorage.getItem("state")
+                    const rsp = await fetch(`${config.url}/issuer/status/${state}`, reqInit);
+                    const json = await rsp.json();
+                    setStatus(json);
+                }, 5000);
             } catch (error) {
-                return [];
+                console.log("error", error);
             }
-        });
-        const useQr = (value) => {
-            try {
-                const valueToStore = value instanceof Function ? value(storedValue) : value;
-                setStoredValue(valueToStore);
-                window.localStorage.setItem(key, JSON.stringify(valueToStore));
-            } catch (error) { }
         };
-        return [storedValue, useQr];
-    }
+        requestVC();
 
-    const handleClickOpen = async () => {
-        setDialogOpen(true);
-        try {
-            const response = await fetch(appUrl, reqInit);
-            const json = await response.json();
-            useQr(json);
-        } catch (error) {
-            console.log("error", error);
+        // cleanup timer when component is unloaded
+        return () => {
+            clearInterval(intervalId);
         }
-        console.log(qr)
-    };
-
-    const handleDialogClose = () => {
-        setDialogOpen(false);
-    };
-
-    const fetchStatus = async () => {
-        var appStatus = `${config.url}/issuer/status/${qr.state}`;
-        try {
-            const response = await fetch(appStatus, reqInit);
-            const json = await response.json();
-            setStatus(json);
-        } catch (error) {
-            console.log("error", error);
-        }
-    };
-
-    console.log(status.Status)
+    }, [])
 
     return (
         <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
@@ -84,25 +63,38 @@ export const Login = () => {
             <TextInput fullWidth variant="filled" label="Password" />
             <Box sx={{ display: 'flex', mt: 2 }}>
                 <Button sx={{ px: 3 }} color="primary" variant="contained">Log in</Button>
-                <Button sx={{ mx: 1 }} color="primary" >Forgotten Password?</Button>
-                <Button sx={{ mx: 1 }} color="primary" >Create an account</Button>
+                <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
+                <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
             </Box>
             <Box sx={{ mt: 4, borderTop: 1, borderColor: 'grey.500' }} />
-            <Dialog fullWidth onClose={handleDialogClose} open={dialogOpen}>
-                <CardMedia
-                    component="img"
-                    height="100%"
-                    image={qr.qrCode}
-                    alt="qr code"
-                />
-                <Button onClick={() => fetchStatus()}>Verify</Button>
-            </Dialog>
-            <Box sx={{ typography: 'body2', mt: 2, color: 'background.paper' }}>
-                Open QR code and scan with microsoft authenticator
-            </Box>
-            <Button onClick={handleClickOpen}>Scan Here</Button>
 
+            <img src={qrCode} alt="qrCode" />
+
+            <Typography variant="body2" sx={{ mt: 2, color: 'background.paper' }}>
+                {status.message} |
+                Scan QR code using Microsoft Authenticator
+            </Typography>
         </Box>
     )
 }
-export default Login
+
+export default Login;
+
+function useLocalStorage(key) {
+    const [storedValue, setStoredValue] = useState(() => {
+        try {
+            const item = window.localStorage.getItem([]);
+            return item ? JSON.parse(item) : [];
+        } catch (error) {
+            return [];
+        }
+    });
+    const useQr = (value) => {
+        try {
+            const valueToStore = value instanceof Function ? value(storedValue) : value;
+            setStoredValue(valueToStore);
+            window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        } catch (error) { }
+    };
+    return [storedValue, useQr];
+}
