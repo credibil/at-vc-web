@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import { HomeIcon } from '@/Icons';
-import { config } from '@/config';
+import { config } from '../../config';
 
 const TextInput = styled(TextField)({
     marginTop: '0.5rem',
