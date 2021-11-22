@@ -23,17 +23,17 @@ export const Login = () => {
     const [qrCode, setQRCode] = useState("");
     const [status, setStatus] = useState({});
 
+
     // get VC issuance request QR code
     useEffect(() => {
         let intervalId;
-
         const requestVC = async () => {
             try {
                 const rsp = await fetch(`${config.url}/issuer/issuance`, reqInit);
                 const json = await rsp.json();
                 setQRCode(json.qrCode);
+                console.log(json)
                 window.localStorage.setItem("state", JSON.stringify(json.state));
-
                 // set timer to check for state change (every 5 secs)
                 intervalId = setInterval(async () => {
                     const state = window.localStorage.getItem("state")
@@ -53,6 +53,8 @@ export const Login = () => {
         }
     }, [])
 
+
+
     return (
         <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
             <Box sx={{ display: 'flex', typography: 'h2', alignItems: 'center', color: 'background.paper' }}>
@@ -66,14 +68,12 @@ export const Login = () => {
                 <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
                 <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
             </Box>
-            <Box sx={{ mt: 4, borderTop: 1, borderColor: 'grey.500' }} />
-
-            <img src={qrCode} alt="qrCode" />
-
-            <Typography variant="body2" sx={{ mt: 2, color: 'background.paper' }}>
-                {status.message} |
-                Scan QR code using Microsoft Authenticator
-            </Typography>
+            <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center', borderTop: 1, borderColor: 'grey.500' }} >
+                <img src={qrCode} alt="qrCode" />
+            </Box>
+            <Box sx={{ display: 'flex', typography: 'body2', justifyContent: 'center', mt: 2, color: 'background.paper' }}>
+                {status.message ? status.message : 'Scan QR code using Microsoft Authenticator'}
+            </Box>
         </Box>
     )
 }
