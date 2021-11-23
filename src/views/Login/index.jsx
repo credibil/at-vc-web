@@ -26,14 +26,14 @@ export const Login = () => {
 
     // get VC issuance request QR code
     useEffect(() => {
-        let intervalId;
+        // let intervalId;
         const requestVC = async () => {
             try {
                 const rsp = await fetch(`${config.url}/issuer/issuance`, reqInit);
                 const json = await rsp.json();
                 setQRCode(json);
                 console.log(json)
-                JSON.stringify(json.state)
+                // JSON.stringify(json.state)
                 window.localStorage.setItem("state", JSON.stringify(json.state));
                 // set timer to check for state change(every 5 secs)
                 intervalId = setInterval(async () => {
@@ -53,24 +53,14 @@ export const Login = () => {
         }
     }, [])
 
-    useEffect(() => {
-        const func = async () => {
-            try {
-                // intervalId = setInterval(async () => {
-                // const state = window.localStorage.getItem("state")
-                const rsp = await fetch(`${config.url}/issuer/status/${qrCode.state}`, reqInit);
-                const json = await rsp.json();
-                setStatus(json);
-                JSON.stringify(json.state)
-                // }, 5000);
-            } catch (error) {
-                console.log("error", error);
-            }
-        }
-        func();
 
+    const func = async () => {
+        const rsp = await fetch(`${config.url}/issuer/status/${qrCode.state}`, reqInit);
+        const json = await rsp.json();
+        setStatus(json);
+        JSON.stringify(json.state)
+    }
 
-    }, [])
     console.log(status.Status)
 
     return (
@@ -89,7 +79,7 @@ export const Login = () => {
             <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center', borderTop: 1, borderColor: 'grey.500' }} >
                 <img src={qrCode.qrCode} alt="qrCode" />
             </Box>
-            {/* <Button onClick={() => onClick()}>Get update</Button> */}
+            <Button onClick={() => func()}>Get update</Button>
             <Box sx={{ display: 'flex', typography: 'body2', justifyContent: 'center', mt: 2, color: 'background.paper' }}>
                 {status.Message}
             </Box>
