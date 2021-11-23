@@ -31,29 +31,47 @@ export const Login = () => {
             try {
                 const rsp = await fetch(`${config.url}/issuer/issuance`, reqInit);
                 const json = await rsp.json();
-                setQRCode(json.qrCode);
+                setQRCode(json);
                 console.log(json)
-                window.localStorage.setItem("state", JSON.stringify(json.state));
+                JSON.stringify(json.state)
+                // window.localStorage.setItem("state", JSON.stringify(json.state));
                 // set timer to check for state change (every 5 secs)
-                intervalId = setInterval(async () => {
-                    const state = window.localStorage.getItem("state")
-                    const rsp = await fetch(`${config.url}/issuer/status/${state}`, reqInit);
-                    const json = await rsp.json();
-                    setStatus(json);
-                }, 5000);
+                // intervalId = setInterval(async () => {
+                //     const state = window.localStorage.getItem("state")
+                //     const rsp = await fetch(`${config.url}/issuer/status/${state}`, reqInit);
+                //     const json = await rsp.json();
+                //     setStatus(json);
+                // }, 5000);
             } catch (error) {
                 console.log("error", error);
             }
         };
         requestVC();
-
         // cleanup timer when component is unloaded
         return () => {
             clearInterval(intervalId);
         }
     }, [])
 
+    useEffect(() => {
+        const onClick = async () => {
+            try {
 
+                // intervalId = setInterval(async () => {
+                // const state = window.localStorage.getItem("state")
+                const rsp = await fetch(`${config.url}/issuer/status/${qrCode.state}`, reqInit);
+                const json = await rsp.json();
+                setStatus(json);
+                JSON.stringify(json.state)
+                // }, 5000);
+            } catch (error) {
+                console.log("error", error);
+            }
+        }
+        onClick();
+        console.log(status.Status)
+
+    }, [])
 
     return (
         <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
@@ -69,10 +87,11 @@ export const Login = () => {
                 <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
             </Box>
             <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center', borderTop: 1, borderColor: 'grey.500' }} >
-                <img src={qrCode} alt="qrCode" />
+                <img src={qrCode.qrCode} alt="qrCode" />
             </Box>
+            {/* <Button onClick={() => onClick()}>Get update</Button> */}
             <Box sx={{ display: 'flex', typography: 'body2', justifyContent: 'center', mt: 2, color: 'background.paper' }}>
-                {status.message ? status.message : 'Scan QR code using Microsoft Authenticator'}
+                {status.Message}
             </Box>
         </Box>
     )
@@ -80,21 +99,3 @@ export const Login = () => {
 
 export default Login;
 
-function useLocalStorage(key) {
-    const [storedValue, setStoredValue] = useState(() => {
-        try {
-            const item = window.localStorage.getItem([]);
-            return item ? JSON.parse(item) : [];
-        } catch (error) {
-            return [];
-        }
-    });
-    const useQr = (value) => {
-        try {
-            const valueToStore = value instanceof Function ? value(storedValue) : value;
-            setStoredValue(valueToStore);
-            window.localStorage.setItem(key, JSON.stringify(valueToStore));
-        } catch (error) { }
-    };
-    return [storedValue, useQr];
-}
