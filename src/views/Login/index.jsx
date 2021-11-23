@@ -54,9 +54,8 @@ export const Login = () => {
     }, [])
 
     useEffect(() => {
-        const onClick = async () => {
+        const func = async () => {
             try {
-
                 // intervalId = setInterval(async () => {
                 // const state = window.localStorage.getItem("state")
                 const rsp = await fetch(`${config.url}/issuer/status/${qrCode.state}`, reqInit);
@@ -68,10 +67,11 @@ export const Login = () => {
                 console.log("error", error);
             }
         }
-        onClick();
-        console.log(status.Status)
+        func();
+
 
     }, [])
+    console.log(status.Status)
 
     return (
         <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
