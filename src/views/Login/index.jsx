@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import { HomeIcon } from '@/Icons';
-import { config } from '@/config';
+import { config } from '../../config';
 
 const TextInput = styled(TextField)({
     marginTop: '0.5rem',
@@ -23,18 +23,19 @@ export const Login = () => {
     const [qrCode, setQRCode] = useState("");
     const [status, setStatus] = useState({});
 
+
     // get VC issuance request QR code
     useEffect(() => {
-        let intervalId;
-
+        // let intervalId;
         const requestVC = async () => {
             try {
                 const rsp = await fetch(`${config.url}/issuer/issuance`, reqInit);
                 const json = await rsp.json();
-                setQRCode(json.qrCode);
+                setQRCode(json);
+                console.log(json)
+                // JSON.stringify(json.state)
                 window.localStorage.setItem("state", JSON.stringify(json.state));
-
-                // set timer to check for state change (every 5 secs)
+                // set timer to check for state change(every 5 secs)
                 intervalId = setInterval(async () => {
                     const state = window.localStorage.getItem("state")
                     const rsp = await fetch(`${config.url}/issuer/status/${state}`, reqInit);
@@ -46,12 +47,21 @@ export const Login = () => {
             }
         };
         requestVC();
-
         // cleanup timer when component is unloaded
         return () => {
             clearInterval(intervalId);
         }
     }, [])
+
+
+    const func = async () => {
+        const rsp = await fetch(`${config.url}/issuer/status/${qrCode.state}`, reqInit);
+        const json = await rsp.json();
+        setStatus(json);
+        JSON.stringify(json.state)
+    }
+
+    console.log(status.Status)
 
     return (
         <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
@@ -66,35 +76,16 @@ export const Login = () => {
                 <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
                 <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
             </Box>
-            <Box sx={{ mt: 4, borderTop: 1, borderColor: 'grey.500' }} />
-
-            <img src={qrCode} alt="qrCode" />
-
-            <Typography variant="body2" sx={{ mt: 2, color: 'background.paper' }}>
-                {status.message} |
-                Scan QR code using Microsoft Authenticator
-            </Typography>
+            <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center', borderTop: 1, borderColor: 'grey.500' }} >
+                <img src={qrCode.qrCode} alt="qrCode" />
+            </Box>
+            <Button onClick={() => func()}>Get update</Button>
+            <Box sx={{ display: 'flex', typography: 'body2', justifyContent: 'center', mt: 2, color: 'background.paper' }}>
+                {status.Message}
+            </Box>
         </Box>
     )
 }
 
 export default Login;
 
-function useLocalStorage(key) {
-    const [storedValue, setStoredValue] = useState(() => {
-        try {
-            const item = window.localStorage.getItem([]);
-            return item ? JSON.parse(item) : [];
-        } catch (error) {
-            return [];
-        }
-    });
-    const useQr = (value) => {
-        try {
-            const valueToStore = value instanceof Function ? value(storedValue) : value;
-            setStoredValue(valueToStore);
-            window.localStorage.setItem(key, JSON.stringify(valueToStore));
-        } catch (error) { }
-    };
-    return [storedValue, useQr];
-}
