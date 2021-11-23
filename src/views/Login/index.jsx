@@ -34,14 +34,14 @@ export const Login = () => {
                 setQRCode(json);
                 console.log(json)
                 JSON.stringify(json.state)
-                // window.localStorage.setItem("state", JSON.stringify(json.state));
-                // set timer to check for state change (every 5 secs)
-                // intervalId = setInterval(async () => {
-                //     const state = window.localStorage.getItem("state")
-                //     const rsp = await fetch(`${config.url}/issuer/status/${state}`, reqInit);
-                //     const json = await rsp.json();
-                //     setStatus(json);
-                // }, 5000);
+                window.localStorage.setItem("state", JSON.stringify(json.state));
+                // set timer to check for state change(every 5 secs)
+                intervalId = setInterval(async () => {
+                    const state = window.localStorage.getItem("state")
+                    const rsp = await fetch(`${config.url}/issuer/status/${state}`, reqInit);
+                    const json = await rsp.json();
+                    setStatus(json);
+                }, 5000);
             } catch (error) {
                 console.log("error", error);
             }
