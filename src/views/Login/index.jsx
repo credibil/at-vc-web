@@ -24,6 +24,13 @@ export const Login = () => {
     const [status, setStatus] = useState({});
 
 
+    const func = async () => {
+        const rsp = await fetch(`${config.url}/issuer/status/${qrCode.state}`, reqInit);
+        const json = await rsp.json();
+        setStatus(json);
+        JSON.stringify(json.state)
+    }
+
     // get VC issuance request QR code
     useEffect(() => {
         // let intervalId;
@@ -54,14 +61,8 @@ export const Login = () => {
     }, [])
 
 
-    const func = async () => {
-        const rsp = await fetch(`${config.url}/issuer/status/${qrCode.state}`, reqInit);
-        const json = await rsp.json();
-        setStatus(json);
-        JSON.stringify(json.state)
-    }
 
-    console.log(status.Status)
+    console.log(status)
 
     return (
         <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
