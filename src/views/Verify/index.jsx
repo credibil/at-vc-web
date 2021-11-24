@@ -3,29 +3,38 @@ import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { config } from '../../config';
 
+import.meta.env.VITE_APP_API;
+
+const init = {
+    method: "GET",
+    mode: 'cors',
+    headers: {
+        Accept: 'application/ json',
+        'Content-Type': 'application/json'
+    },
+}
 
 export const Verify = () => {
     const [qrCode, setQRCode] = useState("");
     const [status, setStatus] = useState({});
-    const reqInit = config.getReqInit;
 
     useEffect(() => {
         let intervalId;
 
         const verifyVC = async () => {
             try {
-                const rsp = await fetch(`${config.urlAlt}/verifier/presentation`, reqInit);
+                const rsp = await fetch(`${import.meta.env.VITE_API_HOST}/verifier/presentation`, init);
                 const json = await rsp.json();
-                setQRCode(json.qrCode);
+                setQRCode(json);
                 window.localStorage.setItem("state", JSON.stringify(json.state));
 
                 // set timer to check for state change (every 5 secs)
                 intervalId = setInterval(async () => {
                     const state = window.localStorage.getItem("state")
-                    const rsp = await fetch(`${config.urlAlt}/verifier/status/${state}`, reqInit);
+                    const rsp = await fetch(`${import.meta.env.VITE_API_HOST}/verifier/status/${state}`, init);
                     const json = await rsp.json();
                     setStatus(json);
-                }, 5000);
+                }, 10000);
             } catch (error) {
                 console.log("error", error);
             }
@@ -38,12 +47,13 @@ export const Verify = () => {
         }
     }, [])
 
+    console.log("status", status)
 
     return (
         <Box>
             <Box>
                 <Box display='flex' justifyContent='center' alignItems='center'>
-                    <img src={qrCode} alt="qrCode" />
+                    <img src={qrCode.qrCode} alt="qrCode" />
                 </Box>
                 <Box sx={{ typography: 'h4', mt: 2 }}>
                     Scan QR code to verify yourself with Microsoft Authenticator
@@ -57,22 +67,3 @@ export const Verify = () => {
 }
 
 export default Verify;
-
-function useLocalStorage(key) {
-    const [storedValue, setStoredValue] = useState(() => {
-        try {
-            const item = window.localStorage.getItem([]);
-            return item ? JSON.parse(item) : [];
-        } catch (error) {
-            return [];
-        }
-    });
-    const useQr = (value) => {
-        try {
-            const valueToStore = value instanceof Function ? value(storedValue) : value;
-            setStoredValue(valueToStore);
-            window.localStorage.setItem(key, JSON.stringify(valueToStore));
-        } catch (error) { }
-    };
-    return [storedValue, useQr];
-}
