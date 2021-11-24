@@ -4,8 +4,6 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-import DoneIcon from '@mui/icons-material/Done';
 import { Link as ActionLink } from 'react-router-dom';
 
 import.meta.env.VITE_APP_API;
@@ -19,48 +17,22 @@ const TextInput = styled(TextField)({
     backgroundColor: '#fff',
 });
 
-const init = {
-    method: "GET",
-    mode: 'cors',
-    headers: {
-        Accept: 'application/ json',
-        'Content-Type': 'application/json'
-    },
-}
 
 export const Login = () => {
-    const [qrCode, setQRCode] = useState("");
-    const [status, setStatus] = useState({});
+    const [login, setLogin] = useState();
+    const [value, setValue] = useState('');
 
-    // get VC issuance request QR code
-    useEffect(() => {
-        let intervalId;
-        const requestVC = async () => {
-            try {
-                const rsp = await fetch(`${import.meta.env.VITE_API_HOST}/issuer/issuance`, init);
-                const json = await rsp.json();
-                setQRCode(json);
-                window.localStorage.setItem("state", json.state);
+    const handleChange = (e) => {
+        setValue(e.target.value);
+    };
 
-                // set timer to check for state change(every 5 secs)
-                intervalId = setInterval(async () => {
-                    const state = window.localStorage.getItem("state")
-                    const rsp = await fetch(`${import.meta.env.VITE_API_HOST}/issuer/status/${state}`, init);
-                    const json = await rsp.json();
-                    setStatus(json);
-                }, 5000);
-            } catch (error) {
-                console.log("error", error);
-            }
-        };
-        requestVC();
-        // cleanup timer when component is unloaded
-        return () => {
-            clearInterval(intervalId);
+    const formValid = () => {
+        if (!value) {
+            return false;
         }
-    }, [])
+        return true;
+    };
 
-    // console.log("status", status)
 
     return (
         <>
@@ -69,29 +41,15 @@ export const Login = () => {
                     <HomeIcon sx={{ fontSize: 60, mr: 1 }} />
                     Log in
                 </Box>
-                <TextInput sx={{ mt: 5 }} fullWidth variant="filled" label="Email Address" />
-                <TextInput fullWidth variant="filled" label="Password" />
+                <TextInput onChange={handleChange} value={value} sx={{ mt: 5 }} fullWidth variant="filled" label="Username" />
+                <TextInput type="password" fullWidth variant="filled" label="Password" />
                 <Box sx={{ display: 'flex', mt: 2 }}>
-                    <Button sx={{ px: 3 }} color="primary" variant="contained">Log in</Button>
+                    <Button disabled={!formValid()} sx={{ px: 3 }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Log in</Button>
                     <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
                     <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
                 </Box>
-                <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center', borderTop: 1, borderColor: 'grey.500' }} >
-                    {status.status === 'awaiting_issuance' &&
-                        <img src={qrCode.qrCode} alt="qrCode" />
-                    }
-                    {status.status === 'request_retrieved' &&
-                        <CircularProgress />
-                    }
-                    {status.status === 'issuance_successful' &&
-                        <DoneIcon color="success" fontSize="large" />
-                    }
-                </Box>
-                <Box sx={{ color: 'background.paper', display: 'flex', typography: 'body2', justifyContent: 'center', mt: 2 }}>
-                    {status.message}
-                </Box>
-                {status.status === 'issuance_successful' && <Button component={ActionLink} to="/verify">Verify details</Button>}
             </Box>
+            {login === false && value}
         </>
     )
 }
