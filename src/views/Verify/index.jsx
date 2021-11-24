@@ -57,7 +57,7 @@ export const Verify = () => {
                     <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center' }} >
                         <img src={qrCode.qrCode} alt="qrCode" />
                     </Box>
-                    <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'body2', mt: 2 }}>
+                    <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'body', mt: 2 }}>
                         {status.Message}
                     </Box>
                 </Box>
