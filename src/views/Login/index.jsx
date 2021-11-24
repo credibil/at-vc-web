@@ -4,6 +4,9 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import DoneIcon from '@mui/icons-material/Done';
+import { Link as ActionLink } from 'react-router-dom';
 
 import.meta.env.VITE_APP_API;
 import { HomeIcon } from '@/Icons';
@@ -45,7 +48,7 @@ export const Login = () => {
                     const rsp = await fetch(`${import.meta.env.VITE_API_HOST}/issuer/status/${state}`, init);
                     const json = await rsp.json();
                     setStatus(json);
-                }, 10000);
+                }, 5000);
             } catch (error) {
                 console.log("error", error);
             }
@@ -74,11 +77,20 @@ export const Login = () => {
                     <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
                 </Box>
                 <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center', borderTop: 1, borderColor: 'grey.500' }} >
-                    <img src={qrCode.qrCode} alt="qrCode" />
+                    {status.status === 'awaiting_issuance' &&
+                        <img src={qrCode.qrCode} alt="qrCode" />
+                    }
+                    {status.status === 'request_retrieved' &&
+                        <CircularProgress />
+                    }
+                    {status.status === 'issuance_successful' &&
+                        <DoneIcon color="success" fontSize="large" />
+                    }
                 </Box>
                 <Box sx={{ color: 'background.paper', display: 'flex', typography: 'body2', justifyContent: 'center', mt: 2 }}>
                     {status.message}
                 </Box>
+                {status.status === 'issuance_successful' && <Button component={ActionLink} to="/verify">Verify details</Button>}
             </Box>
         </>
     )
