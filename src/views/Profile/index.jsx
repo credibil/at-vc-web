@@ -16,7 +16,6 @@ const init = {
     },
 }
 
-
 export const Profile = () => {
     let location = useLocation()
     const [qrCode, setQRCode] = useState("");
@@ -48,24 +47,27 @@ export const Profile = () => {
         }
     }, [])
 
-    console.log("status", status)
+    // console.log("status", status)
 
     return (
-        <Box>
-            <Box sx={{ typography: 'h3', justifyContent: 'center', mt: 2 }}> {`Welcome, ${location.state}`}</Box>
-            {status.status === 'awaiting_issuance' &&
-                <img src={qrCode.qrCode} alt="qrCode" />
-            }
-            {status.status === 'request_retrieved' &&
-                <CircularProgress />
-            }
-            {status.status === 'issuance_successful' &&
-                <DoneIcon color="success" fontSize="large" />
-            }
+        <>
+            <Box sx={{ typography: 'h3', mb: 2, display: 'flex', justifyContent: 'center' }}> {`Welcome, ${location.state}`}</Box>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                {status.status === 'awaiting_issuance' &&
+                    <img src={qrCode.qrCode} alt="qrCode" />
+                }
+                {status.status === 'request_retrieved' &&
+                    <CircularProgress />
+                }
+                {status.status === 'issuance_successful' &&
+                    <DoneIcon color="success" fontSize="large" />
+                }
+
+            </Box>
             <Box sx={{ typography: 'body2', justifyContent: 'center', mt: 2 }}>
                 {status.message}
             </Box>
-        </Box>
+        </>
     )
 }
 export default Profile
