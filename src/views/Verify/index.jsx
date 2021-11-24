@@ -20,7 +20,6 @@ export const Verify = () => {
 
     useEffect(() => {
         let intervalId;
-
         const verifyVC = async () => {
             try {
                 const rsp = await fetch(`${import.meta.env.VITE_API_HOST}/verifier/presentation`, init);

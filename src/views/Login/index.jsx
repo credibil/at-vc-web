@@ -6,6 +6,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import DoneIcon from '@mui/icons-material/Done';
+import { Link as ActionLink } from 'react-router-dom';
 
 import.meta.env.VITE_APP_API;
 import { HomeIcon } from '@/Icons';
@@ -59,7 +60,7 @@ export const Login = () => {
         }
     }, [])
 
-    console.log("status", status)
+    // console.log("status", status)
 
     return (
         <>
@@ -89,6 +90,7 @@ export const Login = () => {
                 <Box sx={{ color: 'background.paper', display: 'flex', typography: 'body2', justifyContent: 'center', mt: 2 }}>
                     {status.message}
                 </Box>
+                {status.status === 'issuance_successful' && <Button component={ActionLink} to="/verify">Verify details</Button>}
             </Box>
         </>
     )
