@@ -51,7 +51,6 @@ export const Login = () => {
             }
         };
         requestVC();
-
         // cleanup timer when component is unloaded
         return () => {
             clearInterval(intervalId);
@@ -74,16 +73,13 @@ export const Login = () => {
                     <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
                     <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
                 </Box>
-            </Box>
-            <>
                 <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center', borderTop: 1, borderColor: 'grey.500' }} >
                     <img src={qrCode.qrCode} alt="qrCode" />
                 </Box>
-
-                <Box sx={{ display: 'flex', typography: 'body2', justifyContent: 'center', mt: 2 }}>
+                <Box sx={{ color: 'background.paper', display: 'flex', typography: 'body2', justifyContent: 'center', mt: 2 }}>
                     {status.message}
                 </Box>
-            </>
+            </Box>
         </>
     )
 }
