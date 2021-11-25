@@ -69,7 +69,8 @@ export const Login = () => {
             clearInterval(intervalId);
         }
     }, [])
-
+    // console.log(status.FirstName + status.LastName)
+    console.log(status)
 
     return (
         <>

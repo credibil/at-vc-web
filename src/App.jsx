@@ -14,6 +14,7 @@ let theme = createTheme(custom);
 theme = responsiveFontSizes(theme)
 
 const App = () => {
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -22,6 +23,7 @@ const App = () => {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
+
             <Route exact path="/profile" element={<Profile />} />
           </Routes>
         </Viewport>
