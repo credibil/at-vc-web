@@ -17,10 +17,20 @@ const TextInput = styled(TextField)({
     backgroundColor: '#fff',
 });
 
+const init = {
+    method: "GET",
+    mode: 'cors',
+    headers: {
+        Accept: 'application/ json',
+        'Content-Type': 'application/json'
+    },
+}
 
 export const Login = () => {
     const [login, setLogin] = useState();
     const [value, setValue] = useState('');
+    const [qrCode, setQRCode] = useState("");
+    const [status, setStatus] = useState({});
 
     const handleChange = (e) => {
         setValue(e.target.value);
@@ -32,6 +42,33 @@ export const Login = () => {
         }
         return true;
     };
+
+    useEffect(() => {
+        let intervalId;
+        const verifyVC = async () => {
+            try {
+                const rsp = await fetch(`${import.meta.env.VITE_API_HOST}/verifier/presentation`, init);
+                const json = await rsp.json();
+                setQRCode(json);
+                window.localStorage.setItem("state", json.state);
+
+                // set timer to check for state change (every 5 secs)
+                intervalId = setInterval(async () => {
+                    const state = window.localStorage.getItem("state")
+                    const rsp = await fetch(`${import.meta.env.VITE_API_HOST}/verifier/status/${state}`, init);
+                    const json = await rsp.json();
+                    setStatus(json);
+                }, 10000);
+            } catch (error) {
+                console.log("error", error);
+            }
+        };
+        verifyVC();
+        // cleanup timer when component is unloaded
+        return () => {
+            clearInterval(intervalId);
+        }
+    }, [])
 
 
     return (
@@ -47,6 +84,15 @@ export const Login = () => {
                     <Button disabled={!formValid()} sx={{ px: 3 }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Log in</Button>
                     <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
                     <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
+                </Box>
+                <Box sx={{ typography: 'h6', mt: 2, color: 'background.paper' }}>
+                    Scan QR code with Microsoft Authenticator to verify yourself
+                </Box>
+                <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center' }} >
+                    <img src={qrCode.qrCode} alt="qrCode" />
+                </Box>
+                <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'body', mt: 2, color: 'background.paper' }}>
+                    {status.Message}
                 </Box>
             </Box>
             {login === false && value}
