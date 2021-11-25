@@ -6,10 +6,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Viewport from './Viewport';
 
 import { custom } from './theme';
-import { Home } from './views/Home'
-import { Login } from './views/Login'
-import { Verify } from './views/Verify'
-import { Profile } from './views/Profile'
+import { Home } from './views/Home';
+import { Login } from './views/Login';
+import { Profile } from './views/Profile';
 
 let theme = createTheme(custom);
 theme = responsiveFontSizes(theme)
@@ -24,7 +23,6 @@ const App = () => {
             <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/profile" element={<Profile />} />
-            <Route exact path="/verify" element={<Verify />} />
           </Routes>
         </Viewport>
       </Router>
