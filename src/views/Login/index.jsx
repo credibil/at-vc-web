@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import DoneIcon from '@mui/icons-material/Done';
 import { Link as ActionLink } from 'react-router-dom';
 
 import.meta.env.VITE_APP_API;
@@ -58,7 +60,7 @@ export const Login = () => {
                     const rsp = await fetch(`${import.meta.env.VITE_API_HOST}/verifier/status/${state}`, init);
                     const json = await rsp.json();
                     setStatus(json);
-                }, 10000);
+                }, 5000);
             } catch (error) {
                 console.log("error", error);
             }
@@ -89,13 +91,22 @@ export const Login = () => {
                     Scan QR code with Microsoft Authenticator to verify yourself
                 </Box>
                 <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center' }} >
-                    <img src={qrCode.qrCode} alt="qrCode" />
+                    {status.Status === '' &&
+                        <img src={qrCode.qrCode} alt="qrCode" />
+                    }
+                    {status.Status === 'request_retrieved' &&
+                        <CircularProgress />
+                    }
+                    {status.Status === 'presentation_verified' &&
+                        <DoneIcon color="success" fontSize="large" />
+                    }
                 </Box>
                 <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'body', mt: 2, color: 'background.paper' }}>
                     {status.Message}
                 </Box>
+                {/* {login === false && value} */}
             </Box>
-            {login === false && value}
+
         </>
     )
 }
