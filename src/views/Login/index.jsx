@@ -87,8 +87,8 @@ export const Login = () => {
                     <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
                     <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
                 </Box>
-                <Box sx={{ typography: 'h6', mt: 2, color: 'background.paper' }}>
-                    Scan QR code with Microsoft Authenticator to verify yourself
+                <Box sx={{ typography: 'h5', mt: 2, color: 'background.paper' }}>
+                    Scan QR code with Microsoft Authenticator to login
                 </Box>
                 <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center' }} >
                     {status.Status === '' &&
