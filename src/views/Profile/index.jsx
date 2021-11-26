@@ -21,6 +21,7 @@ export const Profile = () => {
     const [qrCode, setQRCode] = useState("");
     const [status, setStatus] = useState({});
 
+
     useEffect(() => {
         let intervalId;
         const requestVC = async () => {
@@ -68,6 +69,8 @@ export const Profile = () => {
                     <Box sx={{ typography: 'body2', justifyContent: 'center', mt: 2 }}>
                         {status.message}
                     </Box>
+
+
                 </>
             }
         </>

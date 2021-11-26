@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import DoneIcon from '@mui/icons-material/Done';
-import { Link as ActionLink } from 'react-router-dom';
+import { Link as ActionLink, Navigate } from 'react-router-dom';
 
 import.meta.env.VITE_APP_API;
 import { HomeIcon } from '@/Icons';
@@ -102,10 +102,11 @@ export const Login = () => {
                         <DoneIcon color="success" fontSize="large" />
                     }
                 </Box>
+                {status.Status === 'presentation_verified' && <Navigate state={status.FirstName} to="/profile" />}
                 <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'body', mt: 2, color: 'background.paper' }}>
                     {status.Message}
                 </Box>
-                {/* {login === false && value} */}
+                {login === false && value}
             </Box>
 
         </>
