@@ -51,22 +51,25 @@ export const Profile = () => {
 
     return (
         <>
-            <Box sx={{ typography: 'h3', mb: 2, display: 'flex', justifyContent: 'center' }}> {`Welcome, ${location.state}`}</Box>
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                {status.status === 'awaiting_issuance' &&
-                    <img src={qrCode.qrCode} alt="qrCode" />
-                }
-                {status.status === 'request_retrieved' &&
-                    <CircularProgress />
-                }
-                {status.status === 'issuance_successful' &&
-                    <DoneIcon color="success" fontSize="large" />
-                }
-
-            </Box>
-            <Box sx={{ typography: 'body2', justifyContent: 'center', mt: 2 }}>
-                {status.message}
-            </Box>
+            {location.state === null ? 'No data' :
+                <>
+                    <Box sx={{ typography: 'h3', mb: 2, display: 'flex', justifyContent: 'center' }}> {`Welcome, ${location.state}`}</Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                        {status.status === 'awaiting_issuance' &&
+                            <img src={qrCode.qrCode} alt="qrCode" />
+                        }
+                        {status.status === 'request_retrieved' &&
+                            <CircularProgress />
+                        }
+                        {status.status === 'issuance_successful' &&
+                            <DoneIcon color="success" fontSize="large" />
+                        }
+                    </Box>
+                    <Box sx={{ typography: 'body2', justifyContent: 'center', mt: 2 }}>
+                        {status.message}
+                    </Box>
+                </>
+            }
         </>
     )
 }
