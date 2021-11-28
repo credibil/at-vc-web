@@ -95,7 +95,6 @@ export const Login = () => {
                         </Box>
                     </>
                 }
-
                 <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center' }} >
                     {status.Status === '' &&
                         <img src={qrCode.qrCode} alt="qrCode" />
@@ -113,7 +112,6 @@ export const Login = () => {
                 </Box>
                 {login === false && value}
             </Box>
-
         </>
     )
 }
