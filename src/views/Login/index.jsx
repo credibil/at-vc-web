@@ -90,12 +90,12 @@ export const Login = () => {
                             <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
                             <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
                         </Box>
-                        <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'h5', mt: 2, color: 'background.paper' }}>
+                        <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'h5', pt: 1, mt: 2, color: 'background.paper', borderTop: 1, borderColor: 'background.paper' }}>
                             Scan QR code with Microsoft Authenticator to login
                         </Box>
                     </>
                 }
-                <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center' }} >
+                <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }} >
                     {status.Status === '' &&
                         <img src={qrCode.qrCode} alt="qrCode" />
                     }
