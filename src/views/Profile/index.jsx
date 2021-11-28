@@ -66,11 +66,9 @@ export const Profile = () => {
                             <DoneIcon color="success" fontSize="large" />
                         }
                     </Box>
-                    <Box sx={{ typography: 'body2', justifyContent: 'center', mt: 2 }}>
+                    <Box sx={{ typography: 'body2', display: 'flex', justifyContent: 'center', mt: 2 }}>
                         {status.message}
                     </Box>
-
-
                 </>
             }
         </>

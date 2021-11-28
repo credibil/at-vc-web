@@ -102,7 +102,7 @@ export const Login = () => {
                         <DoneIcon color="success" fontSize="large" />
                     }
                 </Box>
-                {status.Status === 'presentation_verified' && <Navigate state={status.FirstName} to="/profile" />}
+                {status.Status === 'presentation_verified' && <Navigate state={`${status.FirstName} ${status.LastName}`} to="/profile" />}
                 <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'body', mt: 2, color: 'background.paper' }}>
                     {status.Message}
                 </Box>
