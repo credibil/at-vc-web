@@ -81,16 +81,21 @@ export const Login = () => {
                     <HomeIcon sx={{ fontSize: 60, mr: 1 }} />
                     Log in
                 </Box>
-                <TextInput onChange={handleChange} value={value} sx={{ mt: 5 }} fullWidth variant="filled" label="Username" />
-                <TextInput type="password" fullWidth variant="filled" label="Password" />
-                <Box sx={{ display: 'flex', mt: 2 }}>
-                    <Button disabled={!formValid()} sx={{ px: 3 }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Log in</Button>
-                    <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
-                    <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
-                </Box>
-                <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'h5', mt: 2, color: 'background.paper' }}>
-                    Scan QR code with Microsoft Authenticator to login
-                </Box>
+                {status.Status === '' &&
+                    <>
+                        <TextInput onChange={handleChange} value={value} sx={{ mt: 5 }} fullWidth variant="filled" label="Username" />
+                        <TextInput type="password" fullWidth variant="filled" label="Password" />
+                        <Box sx={{ display: 'flex', mt: 2 }}>
+                            <Button disabled={!formValid()} sx={{ px: 3 }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Log in</Button>
+                            <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
+                            <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
+                        </Box>
+                        <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'h5', mt: 2, color: 'background.paper' }}>
+                            Scan QR code with Microsoft Authenticator to login
+                        </Box>
+                    </>
+                }
+
                 <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center' }} >
                     {status.Status === '' &&
                         <img src={qrCode.qrCode} alt="qrCode" />

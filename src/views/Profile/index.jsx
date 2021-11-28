@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import DoneIcon from '@mui/icons-material/Done';
 import { useLocation } from "react-router";
+import { Navigate } from 'react-router-dom';
 
 import.meta.env.VITE_APP_API;
 
@@ -52,7 +53,7 @@ export const Profile = () => {
 
     return (
         <>
-            {location.state === null ? 'No data' :
+            {location.state === null ? <Navigate to="/login" /> :
                 <>
                     <Box sx={{ typography: 'h3', mb: 2, display: 'flex', justifyContent: 'center' }}> {`Welcome, ${location.state}`}</Box>
                     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
