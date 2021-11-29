@@ -78,23 +78,37 @@ export const Login = () => {
                     <HomeIcon sx={{ fontSize: 60, mr: 1 }} />
                     Log in
                 </Box>
-                <TextInput onChange={handleChange} value={value} sx={{ mt: 5 }} fullWidth variant="filled" label="Username" />
-                <TextInput type="password" fullWidth variant="filled" label="Password" />
-                <Box sx={{ display: 'flex', mt: 2 }}>
-                    <Button disabled={!formValid()} sx={{ px: 3 }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Log in</Button>
-                    <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
-                    <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
+                {status.Status === '' &&
+                    <>
+                        <TextInput onChange={handleChange} value={value} sx={{ mt: 5 }} fullWidth variant="filled" label="Username" />
+                        <TextInput type="password" fullWidth variant="filled" label="Password" />
+                        <Box sx={{ display: 'flex', mt: 2 }}>
+                            <Button disabled={!formValid()} sx={{ px: 3 }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Log in</Button>
+                            <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
+                            <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
+                        </Box>
+                        <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'h5', pt: 1, mt: 2, color: 'background.paper', borderTop: 1, borderColor: 'background.paper' }}>
+                            Scan QR code with Microsoft Authenticator to login
+                        </Box>
+                    </>
+                }
+                <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }} >
+                    {status.Status === '' &&
+                        <img src={qrCode.qrCode} alt="qrCode" />
+                    }
+                    {status.Status === 'request_retrieved' &&
+                        <CircularProgress />
+                    }
+                    {status.Status === 'presentation_verified' &&
+                        <DoneIcon color="success" fontSize="large" />
+                    }
                 </Box>
-                <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'h5', mt: 2, color: 'background.paper' }}>
-                    Scan QR code with Microsoft Authenticator to login
-                </Box>
-                {status.Status === 'presentation_verified' && <Navigate state={status.FirstName} to="/profile" />}
+                {status.Status === 'presentation_verified' && <Navigate state={`${status.FirstName} ${status.LastName}`} to="/profile" />}
                 <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'body', mt: 2, color: 'background.paper' }}>
                     {status.Message}
                 </Box>
                 {login === false && value}
             </Box>
-
         </>
     )
 }
