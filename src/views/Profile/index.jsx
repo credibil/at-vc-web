@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import Card from '@mui/material/Card';
 import DoneIcon from '@mui/icons-material/Done';
 import { useLocation } from "react-router";
 import { Navigate } from 'react-router-dom';
@@ -54,7 +55,7 @@ export const Profile = () => {
     return (
         <>
             {location.state === null ? <Navigate to="/login" /> :
-                <>
+                <Card sx={{ p: 1.5 }}>
                     <Box sx={{ typography: 'h3', mb: 2, display: 'flex', justifyContent: 'center' }}> {`Welcome, ${location.state}`}</Box>
                     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                         {status.status === 'awaiting_issuance' &&
@@ -70,7 +71,7 @@ export const Profile = () => {
                     <Box sx={{ typography: 'body2', display: 'flex', justifyContent: 'center', mt: 2 }}>
                         {status.message}
                     </Box>
-                </>
+                </Card>
             }
         </>
     )
