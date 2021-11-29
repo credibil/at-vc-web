@@ -27,7 +27,7 @@ const MenuItems = [
 const labels = [
     { label: 'Home', link: '/' },
     { label: 'Contact Us', link: '/contact' },
-    { label: ' Create an Account', link: '/account' },
+    { label: ' Create an Account', link: '/create' },
 ]
 
 export const Header = () => {
@@ -51,7 +51,7 @@ export const Header = () => {
                         </Link>
                         <ButtonGroup color="inherit" size="small" variant="text">
                             {labels.map((p, i) =>
-                                <Button key={i}>
+                                <Button key={i} component={ActionLink} to={p.link}>
                                     {p.label}
                                 </Button>)}
                         </ButtonGroup>

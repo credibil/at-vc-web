@@ -4,8 +4,6 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-import DoneIcon from '@mui/icons-material/Done';
 import { Link as ActionLink, Navigate } from 'react-router-dom';
 
 import.meta.env.VITE_APP_API;
@@ -31,7 +29,6 @@ const init = {
 export const Login = () => {
     const [login, setLogin] = useState();
     const [value, setValue] = useState('');
-    const [qrCode, setQRCode] = useState("");
     const [status, setStatus] = useState({});
 
     const handleChange = (e) => {
@@ -90,17 +87,6 @@ export const Login = () => {
                 </Box>
                 <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'h5', mt: 2, color: 'background.paper' }}>
                     Scan QR code with Microsoft Authenticator to login
-                </Box>
-                <Box sx={{ mt: 4, display: 'flex', pt: 1, justifyContent: 'center' }} >
-                    {status.Status === '' &&
-                        <img src={qrCode.qrCode} alt="qrCode" />
-                    }
-                    {status.Status === 'request_retrieved' &&
-                        <CircularProgress />
-                    }
-                    {status.Status === 'presentation_verified' &&
-                        <DoneIcon color="success" fontSize="large" />
-                    }
                 </Box>
                 {status.Status === 'presentation_verified' && <Navigate state={status.FirstName} to="/profile" />}
                 <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'body', mt: 2, color: 'background.paper' }}>
