@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import DoneIcon from '@mui/icons-material/Done';
 import { Link as ActionLink, Navigate } from 'react-router-dom';
 
 import.meta.env.VITE_APP_API;
@@ -29,6 +31,7 @@ const init = {
 export const Login = () => {
     const [login, setLogin] = useState();
     const [value, setValue] = useState('');
+    const [qrCode, setQRCode] = useState("");
     const [status, setStatus] = useState({});
 
     const handleChange = (e) => {
