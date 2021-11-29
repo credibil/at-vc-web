@@ -20,7 +20,7 @@ export const Outline = ({ variant, visible }) => {
 export const WaitSkeleton = () => {
 
     return (
-        <Box sx={{ padding: 4 }}>
+        <Box sx={{ padding: 4, width: 600 }}>
             <Skeleton height="5rem" />
             <Skeleton variant="rect" height="20rem" />
             <Skeleton height="5rem" />

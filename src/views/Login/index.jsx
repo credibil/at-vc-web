@@ -11,6 +11,7 @@ import { Outline } from '../../components/WaitSkeleton';
 
 import.meta.env.VITE_APP_API;
 import { HomeIcon } from '@/Icons';
+import { Container } from '@mui/material';
 
 
 const TextInput = styled(TextField)({
@@ -34,7 +35,7 @@ export const Login = () => {
     const [login, setLogin] = useState();
     const [value, setValue] = useState('');
     const [qrCode, setQRCode] = useState("");
-    const [status, setStatus] = useState({});
+    const [status, setStatus] = useState('');
 
     const handleChange = (e) => {
         setValue(e.target.value);
@@ -73,50 +74,51 @@ export const Login = () => {
             clearInterval(intervalId);
         }
     }, [])
-    // console.log(status.FirstName + status.LastName)
-    console.log(status)
+
 
     return (
-        <>
-            <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
-                <Box sx={{ display: 'flex', typography: 'h2', alignItems: 'center', color: 'background.paper' }}>
-                    <HomeIcon sx={{ fontSize: 60, mr: 1 }} />
-                    Log in
-                </Box>
-                {status.Status === '' &&
-                    <>
-                        <TextInput onChange={handleChange} value={value} sx={{ mt: 5 }} fullWidth variant="filled" label="Username" />
-                        <TextInput type="password" fullWidth variant="filled" label="Password" />
-                        <Box sx={{ display: 'flex', mt: 2 }}>
-                            <Button disabled={!formValid()} sx={{ px: 3 }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Log in</Button>
-                            <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
-                            <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
-                        </Box>
-                        <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'h5', pt: 1, mt: 2, color: 'background.paper', borderTop: 1, borderColor: 'background.paper' }}>
-                            Scan QR code with Microsoft Authenticator to login
-                        </Box>
-                    </>
-                }
-                <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }} >
+        < >
+            {status &&
+                <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
+                    <Box sx={{ display: 'flex', typography: 'h2', alignItems: 'center', color: 'background.paper' }}>
+                        <HomeIcon sx={{ fontSize: 60, mr: 1 }} />
+                        Log in
+                    </Box>
                     {status.Status === '' &&
-                        <img src={qrCode.qrCode} alt="qrCode" />
+                        <>
+                            <TextInput onChange={handleChange} value={value} sx={{ mt: 5 }} fullWidth variant="filled" label="Username" />
+                            <TextInput type="password" fullWidth variant="filled" label="Password" />
+                            <Box sx={{ display: 'flex', mt: 2 }}>
+                                <Button disabled={!formValid()} sx={{ px: 3 }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Log in</Button>
+                                <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
+                                <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
+                            </Box>
+                            <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'h5', pt: 1, mt: 2, color: 'background.paper', borderTop: 1, borderColor: 'background.paper' }}>
+                                Scan QR code with Microsoft Authenticator to login
+                            </Box>
+                        </>
                     }
-                    {status.Status === 'request_retrieved' &&
-                        <CircularProgress />
-                    }
-                    {status.Status === 'presentation_verified' &&
-                        <DoneIcon color="success" fontSize="large" />
-                    }
-                </Box>
+                    <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }} >
+                        {status.Status === '' &&
+                            <img src={qrCode.qrCode} alt="qrCode" />
+                        }
+                        {status.Status === 'request_retrieved' &&
+                            <CircularProgress />
+                        }
+                        {status.Status === 'presentation_verified' &&
+                            <DoneIcon color="success" fontSize="large" />
+                        }
+                    </Box>
 
-                {status.Status === 'presentation_verified' && <Navigate state={`${status.FirstName} ${status.LastName}`} to="/profile" />}
-                <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'body', mt: 2, color: 'background.paper' }}>
-                    {status.Message}
-                </Box>
-                {login === false && value}
+                    {status.Status === 'presentation_verified' && <Navigate state={`${status.FirstName} ${status.LastName}`} to="/profile" />}
+                    <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'body', mt: 2, color: 'background.paper' }}>
+                        {status.Message}
+                    </Box>
+                    {login === false && value}
 
-            </Box>
-            <Outline visible={status && {}} />
+                </Box>
+            }
+            <Outline visible={!status} />
         </>
     )
 }
