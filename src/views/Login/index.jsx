@@ -11,8 +11,6 @@ import { Outline } from '../../components/WaitSkeleton';
 
 import.meta.env.VITE_APP_API;
 import { HomeIcon } from '@/Icons';
-import { Container } from '@mui/material';
-
 
 const TextInput = styled(TextField)({
     marginTop: '0.5rem',
@@ -74,10 +72,10 @@ export const Login = () => {
             clearInterval(intervalId);
         }
     }, [])
-
+    console.log(status)
 
     return (
-        < >
+        <>
             {status &&
                 <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
                     <Box sx={{ display: 'flex', typography: 'h2', alignItems: 'center', color: 'background.paper' }}>
@@ -109,13 +107,11 @@ export const Login = () => {
                             <DoneIcon color="success" fontSize="large" />
                         }
                     </Box>
-
-                    {status.Status === 'presentation_verified' && <Navigate state={`${status.FirstName} ${status.LastName}`} to="/profile" />}
+                    {status.Status === 'presentation_verified' && <Navigate state={`${status.GivenName} ${status.FamilyName}`} to="/profile" />}
                     <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'body', mt: 2, color: 'background.paper' }}>
                         {status.Message}
                     </Box>
                     {login === false && value}
-
                 </Box>
             }
             <Outline visible={!status} />

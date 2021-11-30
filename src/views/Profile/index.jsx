@@ -21,7 +21,7 @@ const init = {
 export const Profile = () => {
     let location = useLocation()
     const [qrCode, setQRCode] = useState("");
-    const [status, setStatus] = useState({});
+    const [status, setStatus] = useState('');
 
 
     useEffect(() => {
