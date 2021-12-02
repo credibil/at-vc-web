@@ -92,8 +92,8 @@ export const Login = () => {
                                 <TextInput type="password" fullWidth variant="filled" label="Password" />
                                 <Box sx={{ display: 'flex', mt: 2 }}>
                                     <Button disabled={!formValid()} sx={{ px: 3, '&:hover': { backgroundColor: 'green' }, "&.Mui-disabled": { backgroundColor: 'grey.400' } }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Log in</Button>
-                                    <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
-                                    <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
+                                    <Button sx={{ mx: { md: 1 } }} color="primary">Forgotten Password?</Button>
+                                    <Button sx={{ mx: { md: 1 } }} color="primary">Create an account</Button>
                                 </Box>
                                 <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'h5', pt: 1, mt: 2, color: 'background.paper', borderTop: 1, borderColor: 'background.paper' }}>
                                     Scan QR code with Microsoft Authenticator to login
