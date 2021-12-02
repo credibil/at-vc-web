@@ -10,8 +10,6 @@ import Footer from './Footer';
 
 const CustomBox = styled(Box)(({ theme }) => ({
     flexGrow: 1,
-    padding: theme.spacing(4),
-    marginTop: theme.spacing(1),
     minHeight: `calc(90vh - ${theme.spacing(8)}px)`
 }));
 
