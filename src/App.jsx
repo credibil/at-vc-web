@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense } from 'react';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
@@ -10,7 +10,7 @@ import { custom } from './theme';
 import { Home } from './views/Home';
 import { Login } from './views/Login';
 import { Profile } from './views/Profile';
-import { Create } from './views/Create'
+import { Create } from './views/Create';
 
 let theme = createTheme(custom);
 theme = responsiveFontSizes(theme)
