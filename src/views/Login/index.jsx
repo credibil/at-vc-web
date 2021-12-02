@@ -91,7 +91,7 @@ export const Login = () => {
                                 <TextInput onChange={handleChange} value={value} sx={{ mt: 5 }} fullWidth variant="filled" label="Username" />
                                 <TextInput type="password" fullWidth variant="filled" label="Password" />
                                 <Box sx={{ display: 'flex', mt: 2 }}>
-                                    <Button disabled={!formValid()} sx={{ px: 3 }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Log in</Button>
+                                    <Button disabled={!formValid()} sx={{ px: 3, '&:hover': { backgroundColor: 'green' } }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Log in</Button>
                                     <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
                                     <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
                                 </Box>
@@ -107,11 +107,10 @@ export const Login = () => {
                             {status.Status === 'request_retrieved' &&
                                 <CircularProgress />
                             }
-                            {status.Status === 'presentation_verified' &&
-                                <DoneIcon color="success" fontSize="large" />
-                            }
                         </Box>
-                        {status.Status === 'presentation_verified' && <Navigate state={`${status.GivenName} ${status.FamilyName}`} to="/profile" />}
+                        {status.Status === 'presentation_verified' &&
+                            <Navigate state={`${status.GivenName} ${status.FamilyName}`} to="/profile" />
+                        }
                         <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'body', mt: 2, color: 'background.paper' }}>
                             {status.Message}
                         </Box>
