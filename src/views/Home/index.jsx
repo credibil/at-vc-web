@@ -44,7 +44,7 @@ export const Home = () => {
 
     return (
         <CardMedia sx={{ py: 10, m: '0 calc(50% - 50vw)', display: 'flex', justifyContent: 'center', height: 500 }} image={Background} alt="">
-            <Grid container spacing={4} container sx={{ maxWidth: 'lg' }}>
+            <Grid container spacing={4} container sx={{ maxWidth: 'lg', px: 2 }}>
                 <Grid item xs={12} md={6} >
                     <Box sx={{ backgroundColor: 'secondary.main', display: 'flex' }}>
                         {tabArray.map((item, i) =>
