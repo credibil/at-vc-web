@@ -79,9 +79,9 @@ export const Login = () => {
 
     return (
         <Dialog fullScreen open={true}>
-            <CardMedia sx={{ py: 10, display: 'flex', justifyContent: 'center', height: '100%' }} image={Background} alt="">
+            <CardMedia sx={{ display: 'flex', alignContent: 'center', justifyContent: 'center', height: '100%', alignItems: 'center' }} image={Background} alt="">
                 {status &&
-                    <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1, mt: 10, maxHeight: "65%" }}>
+                    <Box sx={{ backgroundColor: 'secondary.main', p: 3, borderRadius: 1, mx: 2 }}>
                         <Box sx={{ display: 'flex', typography: 'h2', alignItems: 'center', color: 'background.paper' }}>
                             <HomeIcon sx={{ fontSize: 60, mr: 1 }} />
                             Log in
