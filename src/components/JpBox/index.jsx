@@ -63,7 +63,7 @@ export const JpBox = () => {
                         <Box>
                             <TextInput fullWidth variant="filled" label="Choose starting point" />
                             <TextInput fullWidth variant="filled" label="Choose destination point" />
-                            <Button size="large" disabled sx={{ my: 2 }} fullWidth variant="contained">Plan my journey</Button>
+                            <Button size="large" disabled sx={{ my: 2, "&.Mui-disabled": { backgroundColor: 'grey.400' } }} fullWidth variant="contained">Plan my journey</Button>
                         </Box>
                         <ImportExportIcon sx={{ position: 'relative', top: 50, left: 10 }} color="primary" fontSize="large" />
                     </Box>
