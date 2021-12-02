@@ -27,9 +27,6 @@ export const components = {
                 disableElevation: true,
                 borderRadius: '0.25rem',
                 boxShadow: 'none',
-                '&:disabled': {
-                    backgroundColor: '#444E58'
-                },
                 '&:hover': {
                     boxShadow: 'none',
                 },

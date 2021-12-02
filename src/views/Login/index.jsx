@@ -91,7 +91,7 @@ export const Login = () => {
                                 <TextInput onChange={handleChange} value={value} sx={{ mt: 5 }} fullWidth variant="filled" label="Username" />
                                 <TextInput type="password" fullWidth variant="filled" label="Password" />
                                 <Box sx={{ display: 'flex', mt: 2 }}>
-                                    <Button disabled={!formValid()} sx={{ px: 3, '&:hover': { backgroundColor: 'green' } }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Log in</Button>
+                                    <Button disabled={!formValid()} sx={{ px: 3, '&:hover': { backgroundColor: 'green' }, "&.Mui-disabled": { backgroundColor: 'grey.400' } }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Log in</Button>
                                     <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
                                     <Button sx={{ mx: 1 }} color="primary">Create an account</Button>
                                 </Box>
