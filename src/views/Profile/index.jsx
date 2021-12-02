@@ -24,7 +24,6 @@ export const Profile = () => {
     const [qrCode, setQRCode] = useState("");
     const [status, setStatus] = useState('');
 
-
     useEffect(() => {
         let intervalId;
         const requestVC = async () => {

@@ -5,8 +5,6 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-// import CircularProgress from '@mui/material/CircularProgress';
-// import DoneIcon from '@mui/icons-material/Done';
 import { Link as ActionLink } from 'react-router-dom';
 
 import.meta.env.VITE_APP_API;
@@ -20,12 +18,9 @@ const TextInput = styled(TextField)({
     backgroundColor: '#fff',
 });
 
-
-
 export const Create = () => {
     const [login, setLogin] = useState();
     const [value, setValue] = useState('');
-    const [status, setStatus] = useState({});
 
     const handleChange = (e) => {
         setValue(e.target.value);
@@ -52,10 +47,6 @@ export const Create = () => {
                     <Button disabled={!formValid()} sx={{ px: 3 }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Sign Up</Button>
                     <Button sx={{ mx: 1 }} color="primary">Forgotten Password?</Button>
                     <Button sx={{ mx: 1 }} color="primary">Login</Button>
-                </Box>
-                {status.Status === 'presentation_verified' && <Navigate state={status.FirstName} to="/profile" />}
-                <Box sx={{ typography: 'body', mt: 2, color: 'background.paper', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    {status.Message}
                 </Box>
                 {login === false && value}
             </Box>
