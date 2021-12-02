@@ -6,7 +6,7 @@ export const typography = {
 
     h1: {
         fontWeight: 700,
-        fontSize: '3.875rem',
+        fontSize: '5rem',
         lineHeight: 1.2,
         color: '#0C1451',
     },
