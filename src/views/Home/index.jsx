@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 
 import Background from '../../Images/home.jpg';
-import JpBox from '../../components/JPBox';
+import { JpBox } from '../../components/JpBox';
 
 
 export const Home = () => {
