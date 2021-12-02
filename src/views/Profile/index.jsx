@@ -58,7 +58,7 @@ export const Profile = () => {
             {location.state === null ? <Navigate to="/login" /> :
                 <>
                     {status &&
-                        <Card sx={{ p: 1.5 }}>
+                        <Card sx={{ p: 1.5, mt: 10 }}>
                             <Box sx={{ typography: 'h3', mb: 2, display: 'flex', justifyContent: 'center' }}> {`Welcome, ${location.state}`}</Box>
                             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                 {status.status === 'awaiting_issuance' &&
