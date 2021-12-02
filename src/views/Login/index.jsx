@@ -5,7 +5,6 @@ import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
-import DoneIcon from '@mui/icons-material/Done';
 import { Link as ActionLink, Navigate } from 'react-router-dom';
 import { Outline } from '../../components/WaitSkeleton';
 import Dialog from '@mui/material/Dialog';
@@ -35,7 +34,7 @@ const init = {
 export const Login = () => {
     const [login, setLogin] = useState();
     const [value, setValue] = useState('');
-    const [qrCode, setQRCode] = useState("");
+    const [qrCode, setQRCode] = useState('');
     const [status, setStatus] = useState('');
 
     const handleChange = (e) => {
@@ -75,7 +74,7 @@ export const Login = () => {
             clearInterval(intervalId);
         }
     }, [])
-    console.log(status)
+    // console.log(status)
 
     return (
         <Dialog fullScreen open={true}>
@@ -91,7 +90,13 @@ export const Login = () => {
                                 <TextInput onChange={handleChange} value={value} sx={{ mt: 5 }} fullWidth variant="filled" label="Username" />
                                 <TextInput type="password" fullWidth variant="filled" label="Password" />
                                 <Box sx={{ display: 'flex', mt: 2 }}>
-                                    <Button disabled={!formValid()} sx={{ px: 3, '&:hover': { backgroundColor: 'green' }, "&.Mui-disabled": { backgroundColor: 'grey.400' } }} state={value} onClick={() => setLogin()} component={ActionLink} to="/profile" color="primary" variant="contained">Log in</Button>
+                                    <Button disabled={!formValid()}
+                                        sx={{ px: 3, '&:hover': { backgroundColor: 'green' }, "&.Mui-disabled": { backgroundColor: 'grey.400' } }}
+                                        state={value} onClick={() => setLogin()}
+                                        component={ActionLink}
+                                        to="/profile"
+                                        color="primary"
+                                        variant="contained">Log in</Button>
                                     <Button sx={{ mx: { md: 1 } }} color="primary">Forgotten Password?</Button>
                                     <Button sx={{ mx: { md: 1 } }} color="primary">Create an account</Button>
                                 </Box>
