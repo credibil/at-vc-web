@@ -41,7 +41,7 @@ export const Create = () => {
 
     return (
         <>
-            <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1 }}>
+            <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1, mt: 10 }}>
                 <Box sx={{ display: 'flex', typography: 'h2', alignItems: 'center', color: 'background.paper' }}>
                     <HomeIcon sx={{ fontSize: 60, mr: 1 }} />
                     Create New Account
