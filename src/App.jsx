@@ -11,6 +11,7 @@ import { Home } from './views/Home';
 import { Login } from './views/Login';
 import { Profile } from './views/Profile';
 import { Create } from './views/Create';
+import { MyAT } from './views/MyAT'
 
 let theme = createTheme(custom);
 theme = responsiveFontSizes(theme)
@@ -28,6 +29,7 @@ const App = () => {
               <Route exact path="/Create" element={<Create />} />
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/profile" element={<Profile />} />
+              <Route exact path="/dashboard" element={<MyAT />} />
             </Routes>
           </Suspense>
         </Viewport>

@@ -113,7 +113,7 @@ export const Login = () => {
                             }
                         </Box>
                         {status.Status === 'presentation_verified' &&
-                            <Navigate state={`${status.GivenName} ${status.FamilyName}`} to="/profile" />
+                            <Navigate state={`${status.GivenName} ${status.FamilyName}`} to="/dashboard" />
                         }
                         <Box display='flex' justifyContent='center' alignItems='center' sx={{ typography: 'body', mt: 2, color: 'background.paper' }}>
                             {status.Message}
