@@ -93,7 +93,7 @@ export const Login = () => {
                                         sx={{ px: 3, '&:hover': { backgroundColor: 'green' }, "&.Mui-disabled": { backgroundColor: 'grey.400' } }}
                                         state={value} onClick={() => setLogin()}
                                         component={ActionLink}
-                                        to="/profile"
+                                        to="/dashboard"
                                         color="primary"
                                         variant="contained">Log in</Button>
                                     <Button sx={{ mx: { md: 1 } }} color="primary">Forgotten Password?</Button>
