@@ -57,23 +57,31 @@ export const Profile = () => {
             {location.state === null ? <Navigate to="/login" /> :
                 <>
                     {status &&
-                        <Card sx={{ p: 1.5, mt: 10 }}>
-                            <Box sx={{ typography: 'h3', mb: 2, display: 'flex', justifyContent: 'center' }}> {`Welcome, ${location.state}`}</Box>
-                            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                                {status.status === 'awaiting_issuance' &&
-                                    <img src={qrCode.qrCode} alt="qrCode" />
-                                }
-                                {status.status === 'request_retrieved' &&
-                                    <CircularProgress />
-                                }
-                                {status.status === 'issuance_successful' &&
-                                    <DoneIcon color="success" fontSize="large" />
-                                }
-                            </Box>
-                            <Box sx={{ typography: 'body2', display: 'flex', justifyContent: 'center', mt: 2 }}>
-                                {status.message}
-                            </Box>
-                        </Card>
+                        <>
+                            <Box sx={{ paddingTop: 5, typography: 'h3', mb: 2, display: 'flex', justifyContent: 'center' }}> {`${location.state}`}</Box>
+                            <Card sx={{ p: 1.5, mt: 5 }}>
+                                <Box sx={{ typography: 'h4', display: 'flex', justifyContent: 'center', mt: 2 }}>
+                                    Scan this image using Microsoft Authenticator
+                                </Box>
+                                <Box sx={{ typography: 'body2', display: 'flex', justifyContent: 'center', mt: 2 }}>
+                                    Scan QR code to set up passwordless login
+                                </Box>
+                                <Box sx={{ display: 'flex', justifyContent: 'center', padding: 5 }}>
+                                    {status.status === 'awaiting_issuance' &&
+                                        <img src={qrCode.qrCode} alt="qrCode" />
+                                    }
+                                    {status.status === 'request_retrieved' &&
+                                        <CircularProgress />
+                                    }
+                                    {status.status === 'issuance_successful' &&
+                                        <DoneIcon color="success" fontSize="large" />
+                                    }
+                                </Box>
+                                <Box sx={{ typography: 'body2', display: 'flex', justifyContent: 'center', mt: 2 }}>
+                                    {status.message}
+                                </Box>
+                            </Card>
+                        </>
                     }
                     <Outline visible={!status} />
                 </>
