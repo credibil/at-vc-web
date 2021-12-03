@@ -6,7 +6,6 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Link as ActionLink, Navigate } from 'react-router-dom';
-import { Outline } from '../../components/WaitSkeleton';
 import Dialog from '@mui/material/Dialog';
 import CardMedia from '@mui/material/CardMedia';
 
@@ -79,7 +78,7 @@ export const Login = () => {
     return (
         <Dialog fullScreen open={true}>
             <CardMedia sx={{ display: 'flex', alignContent: 'center', justifyContent: 'center', height: '100%', alignItems: 'center' }} image={Background} alt="">
-                {status &&
+                {status ?
                     <Box sx={{ backgroundColor: 'secondary.main', p: 3, borderRadius: 1, mx: 2 }}>
                         <Box sx={{ display: 'flex', typography: 'h2', alignItems: 'center', color: 'background.paper' }}>
                             <HomeIcon sx={{ fontSize: 60, mr: 1 }} />
@@ -121,8 +120,10 @@ export const Login = () => {
                         </Box>
                         {login === false && value}
                     </Box>
+                    :
+                    <CircularProgress />
                 }
-                <Outline visible={!status} />
+
             </CardMedia>
 
         </Dialog>
