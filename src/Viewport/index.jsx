@@ -21,7 +21,7 @@ export const Viewport = ({ children }) => {
             display: 'flex',
             flexDirection: 'column',
             minHeight: '100vh',
-            alignItems: 'center'
+            // alignItems: 'center'
         }}
         >
             <Header />
