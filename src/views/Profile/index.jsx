@@ -53,7 +53,11 @@ export const Profile = () => {
     // console.log("status", status)
 
     return (
-        <>
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+        }}>
             {location.state === null ? <Navigate to="/login" /> :
                 status &&
                 <>
@@ -83,7 +87,7 @@ export const Profile = () => {
                 </>
             }
             <Outline visible={!status} />
-        </>
+        </Box>
     )
 }
 export default Profile
