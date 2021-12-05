@@ -10,7 +10,7 @@ export const MyAT = () => {
 
     return (
         <>
-            {location.state === null ? <Navigate to="/login" /> :
+            {location.state === null ? <Navigate to="/" /> :
                 <Card sx={{ p: 1.5, mt: 10 }}>
                     <Box sx={{ typography: 'h3', mb: 2, display: 'flex', justifyContent: 'center' }}> {location.state}</Box>
                 </Card>
