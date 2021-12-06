@@ -23,7 +23,7 @@ const iconArray = [
     { title: <Instagram sx={{ color: 'white' }} /> },
     { title: <YouTube sx={{ color: 'white' }} /> },
     { title: <LinkedIn sx={{ color: 'white' }} /> },
-    { title: <img src='https://at.govt.nz/media/1982482/logo-new_zealand_government.svg' /> },
+
 ]
 
 export const Footer = () => {
@@ -48,6 +48,9 @@ export const Footer = () => {
                             {item.title}
                         </IconButton>
                     )}
+                    <Button size="small">
+                        <img src='https://at.govt.nz/media/1982482/logo-new_zealand_government.svg' />
+                    </Button>
                 </Box>
             </Grid>
         </Box >
