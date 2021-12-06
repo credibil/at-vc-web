@@ -1,26 +1,56 @@
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import { LinkedIn } from '@mui/icons-material';
+import { Twitter } from '@mui/icons-material';
+import { Facebook } from '@mui/icons-material';
+import { Instagram } from '@mui/icons-material';
+import { YouTube } from '@mui/icons-material';
 
-function Copyright() {
-    return (
-        <Typography variant="body2" color="text.secondary">
-            {'Copyright © '}
-            <Link color="inherit" href="https://credibil.io" target="_blank" rel="noopener">
-                Credibil
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+const array = [
+    { title: "Contact us" },
+    { title: "Terms of use" },
+    { title: "Accessibility" },
+    { title: "Privacy" },
+    { title: "Careers" },
+    { title: "Copyright" },
+]
 
-export default function Footer() {
+const iconArray = [
+    { title: <Twitter sx={{ color: 'white' }} /> },
+    { title: <Facebook sx={{ color: 'white' }} /> },
+    { title: <Instagram sx={{ color: 'white' }} /> },
+    { title: <YouTube sx={{ color: 'white' }} /> },
+    { title: <LinkedIn sx={{ color: 'white' }} /> },
+    { title: <img src='https://at.govt.nz/media/1982482/logo-new_zealand_government.svg' /> },
+]
+
+export const Footer = () => {
     return (
-        <Box display="flex" component="footer" justifyContent="center"
-            sx={{ py: 3, px: 2, mt: 'auto', ml: 'auto', mr: 'auto' }}
-        >
-            <Copyright />
+        <Box display="flex" component="footer" sx={{ px: 6, py: 5, bgcolor: '#152239', width: '100%' }}>
+            <Grid container
+                direction="row"
+                justifyContent="space-around"
+                alignItems="center">
+                <Box sx={{ display: 'flex' }}>
+                    <img alt='' src='https://at.govt.nz/media/1982480/logo-at.svg' />
+                    {array.map((item, i) =>
+                        <Button key={i} size="small" sx={{ color: 'white' }}>
+                            {item.title}
+                        </Button>
+                    )}
+                    <img src='https://shielded.co.nz/img/custom-logo.png'></img>
+                </Box>
+                <Box sx={{ display: 'flex' }}>
+                    {iconArray.map((item, i) =>
+                        <Button key={i} size="small" sx={{ color: 'white' }}>
+                            {item.title}
+                        </Button>
+                    )}
+                </Box>
+            </Grid>
         </Box >
     );
 }
+export default Footer;
+
