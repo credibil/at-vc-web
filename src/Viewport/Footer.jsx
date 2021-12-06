@@ -27,7 +27,7 @@ const iconArray = [
 
 export const Footer = () => {
     return (
-        <Box display="flex" component="footer" sx={{ px: 6, py: 5, bgcolor: '#152239', width: '100%' }}>
+        <Box display="flex" component="footer" sx={{ px: 6, py: 5, bgcolor: '#152239', width: '100%', mt: 2 }}>
             <Grid container
                 direction="row"
                 justifyContent="space-around"
@@ -39,9 +39,9 @@ export const Footer = () => {
                             {item.title}
                         </Button>
                     )}
-                    <img src='https://shielded.co.nz/img/custom-logo.png'></img>
+                    <img alt="" src='https://shielded.co.nz/img/custom-logo.png' />
                 </Box>
-                <Box sx={{ display: 'flex' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
                     {iconArray.map((item, i) =>
                         <Button key={i} size="small" sx={{ color: 'white' }}>
                             {item.title}
