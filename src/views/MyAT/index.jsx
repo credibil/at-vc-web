@@ -19,14 +19,14 @@ export const MyAT = () => {
         <>
             {location.state === null ? <Navigate to="/" /> :
                 <>
-                    <Box sx={{ my: 3, display: 'flex', justifyContent: 'space-between' }}>
+                    <Box sx={{ my: 3, display: 'flex', py: 3, justifyContent: 'space-between' }}>
                         <Typography variant="h1" >MyAT</Typography>
-                        <Button variant="contained" endIcon={<PersonIcon />}>My details</Button>
+                        <Button sx={{ height: '2rem' }} variant="contained" endIcon={<PersonIcon />}>My details</Button>
                     </Box>
                     <Typography variant="subtitle1" >Hello {location.state}</Typography>
                     <Grid container>
                         <Grid item xs={12} md={5} >
-                            <Box sx={{ backgroundColor: 'grey.100', px: 5, py: 2 }}>
+                            <Box sx={{ backgroundColor: 'grey.100', px: 5, py: 2, mt: 2 }}>
                                 <Typography sx={{ my: 1, color: 'primary.main' }} variant="h2">My AT HOP Cards</Typography>
                                 <Card sx={{ p: 2 }}>
                                     <Typography sx={{ my: 1 }} variant="h3">{`${location.state}'s card`}</Typography>
