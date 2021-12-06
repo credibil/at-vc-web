@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useState } from 'react';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -35,7 +34,12 @@ export const Create = () => {
 
 
     return (
-        <>
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+        }}
+        >
             <Box sx={{ backgroundColor: 'secondary.main', width: 500, p: 3, borderRadius: 1, mt: 10 }}>
                 <Box sx={{ display: 'flex', typography: 'h2', alignItems: 'center', color: 'background.paper' }}>
                     <HomeIcon sx={{ fontSize: 60, mr: 1 }} />
@@ -50,7 +54,7 @@ export const Create = () => {
                 </Box>
                 {login === false && value}
             </Box>
-        </>
+        </Box>
     )
 }
 export default Create;

@@ -123,13 +123,8 @@ export const Login = () => {
                     :
                     <CircularProgress />
                 }
-
             </CardMedia>
-
         </Dialog>
-
-
-
     )
 }
 

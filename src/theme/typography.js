@@ -42,10 +42,9 @@ export const typography = {
     },
     subtitle1: {
         fontWeight: 400,
-        fontSize: '0.875rem',
+        fontSize: '2rem',
         lineHeight: 1.4,
         letterSpacing: '0.0286em',
-        color: '#7a7b7c'
     },
     subtitle2: {
         fontWeight: 600,
