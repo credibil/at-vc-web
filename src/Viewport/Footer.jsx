@@ -36,7 +36,7 @@ export const Footer = () => {
                 <Box sx={{ display: 'flex' }}>
                     <img alt='' src='https://at.govt.nz/media/1982480/logo-at.svg' />
                     {array.map((item, i) =>
-                        <Button key={i} size="small" sx={{ color: 'background.paper' }}>
+                        <Button key={i} size="small" sx={{ color: 'background.paper', my: 2, mx: 0.5 }}>
                             {item.title}
                         </Button>
                     )}

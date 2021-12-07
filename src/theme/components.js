@@ -22,6 +22,7 @@ export const components = {
         styleOverrides: {
             root: {
                 borderRadius: '0.25rem',
+                // maxHeight: '2rem'
             },
             contained: {
                 disableElevation: true,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import Card from '@mui/material/Card';
 import DoneIcon from '@mui/icons-material/Done';
@@ -62,13 +63,15 @@ export const Profile = () => {
                 status &&
                 <>
                     <Box sx={{ paddingTop: 5, typography: 'h3', mb: 2, display: 'flex', justifyContent: 'center' }}> {`${location.state}`}</Box>
-                    <Card sx={{ p: 1.5, mt: 5 }}>
-                        <Box sx={{ typography: 'h4', display: 'flex', justifyContent: 'center', mt: 2 }}>
+                    <Card sx={{ p: 1.5, mt: 5, width: { md: '30%' } }}>
+
+                        <Typography sx={{ textAlign: 'center', mt: 2 }} gutterBottom variant='h4'>
                             Scan this image using Microsoft Authenticator
-                        </Box>
-                        <Box sx={{ typography: 'body2', display: 'flex', justifyContent: 'center', mt: 2 }}>
+                        </Typography>
+                        <Typography sx={{ textAlign: 'center' }} variant='body2'>
                             Scan QR code to set up passwordless login
-                        </Box>
+                        </Typography>
+
                         <Box sx={{ display: 'flex', justifyContent: 'center', padding: 5 }}>
                             {status.status === 'awaiting_issuance' &&
                                 <img src={qrCode.qrCode} alt="qrCode" />
@@ -80,14 +83,14 @@ export const Profile = () => {
                                 <DoneIcon color="success" fontSize="large" />
                             }
                         </Box>
-                        <Box sx={{ typography: 'body2', display: 'flex', justifyContent: 'center', mt: 2 }}>
+                        <Typography sx={{ textAlign: 'center' }} gutterBottom variant='body2'>
                             {status.message}
-                        </Box>
+                        </Typography>
                     </Card>
                 </>
             }
             <Outline visible={!status} />
-        </Box>
+        </Box >
     )
 }
 export default Profile
