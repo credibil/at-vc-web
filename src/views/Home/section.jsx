@@ -19,7 +19,7 @@ const tabs = [
 
 export const Section = () => {
     return (
-        <Box sx={{ px: 6, py: 2, backgroundColor: 'grey.100', margin: '0 calc(50% - 50vw)' }}>
+        <Box sx={{ py: 6, backgroundColor: 'grey.100', margin: '0 calc(50% - 50vw)' }}>
             <Container maxWidth="lg">
                 <Grid container
                     direction="row"

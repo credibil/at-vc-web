@@ -28,7 +28,7 @@ const iconArray = [
 
 export const Footer = () => {
     return (
-        <Box display="flex" component="footer" sx={{ px: 6, py: 5, bgcolor: 'secondary.dark', width: '100%', mt: 2 }}>
+        <Box display="flex" component="footer" sx={{ px: 6, py: 5, bgcolor: 'secondary.dark', width: '100%' }}>
             <Grid container
                 direction="row"
                 justifyContent="space-around"
@@ -49,7 +49,7 @@ export const Footer = () => {
                         </IconButton>
                     )}
                     <Button size="small">
-                        <img src='https://at.govt.nz/media/1982482/logo-new_zealand_government.svg' />
+                        <img src='https://at.govt.nz/media/1982482/logo-new_zealand_government.svg' alt="" />
                     </Button>
                 </Box>
             </Grid>
