@@ -12,15 +12,13 @@ on:
     branches: [main]
 
 env:
-  IMAGE_REPO: ghcr.io/${{ github.repository }}
-  CA_GROUP: rg-atvc
-  CA_NAME: ca-atvc
+  AZURE_WEBAPP_NAME: ReactJSRecipeAppGitHubActionsOct12020 # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: "." # set this to the path to your web app project, defaults to the repository root
 
 jobs:
   # ----------------------------------------------------
-  # Build a docker image, tag, and publish
-  #  - only runs if [tag:patch|minor|major] is found
-  #    in commit message
+  # Build React app. Only runs if [tag:patch|minor|major] 
+  # is found in commit message.
   # ----------------------------------------------------
   build:
     runs-on: ubuntu-latest
@@ -35,8 +33,7 @@ jobs:
       || contains(github.event.head_commit.message, '[tag:major]')
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
@@ -61,27 +58,19 @@ jobs:
               sha: context.sha
             })
 
-      # log in to docker repo (Github container registry)
-      - name: Log in to GitHub container registry
-        uses: docker/login-action@v1
+      - name: Setup node
+        uses: actions/setup-node@v2
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          node-version: 14
+          cache: npm-cache
 
-      # generate docker image tag using the new version
-      - name: Generate image tag
-        id: tag
+      - name: Build app
         run: |
-          echo "::set-output name=image-tag::${{ env.IMAGE_REPO }}:${{ steps.version.outputs.version_tag }}"
+          npm install
+          npm run build --if-present
 
-      # build and publish docker image
-      - name: Build and push image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.tag.outputs.image-tag }}, ${{ env.IMAGE_REPO }}:latest
+      - name: Test build
+        run: npm run test --if-present
 
       - name: Create release
         uses: actions/github-script@v5
@@ -93,11 +82,8 @@ jobs:
               tag_name: "${{ steps.version.outputs.version_tag }}"
             })
 
-    outputs:
-      image-tag: ${{ steps.tag.outputs.image-tag }}
-
   # ----------------------------------------------------
-  # Deploy this build
+  # Deploy build
   # ----------------------------------------------------
   deploy:
     runs-on: ubuntu-latest
@@ -108,15 +94,17 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-      - name: Deploy to ContainerApp
+
+      - name: Upload to blob storage
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            echo "Installing ContainerApp extension"
-            az extension add --source https://workerappscliextension.blob.core.windows.net/azure-cli-extension/containerapp-0.2.0-py2.py3-none-any.whl --yes
-            echo "Deploying..."
-            az containerapp update \
-              --resource-group ${{ env.CA_GROUP }} \
-              --name ${{ env.CA_NAME }} \
-              --image ${{ needs.build.outputs.image-tag }}
+            az storage blob upload-batch \
+              --account-name stperdx  \
+              --auth-mode key \
+              --destination '$web' \
+              --source ./dist
+
+      - name: Azure logout
+        run: az logout
+        if: always()
