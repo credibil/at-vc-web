@@ -73,21 +73,21 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Upload to blob storage
+      - name: Upload to blob store
         uses: azure/CLI@v1
         with:
           inlineScript: |
             az storage blob delete-batch \
               --account-name stperdx \
               --source '$web' \
-              --pattern '*'
-
-            # --auth-mode login
+              --pattern '*' \
+              --auth-mode login
 
             az storage blob upload-batch \
               --account-name stperdx  \
               --destination '$web' \
-              --source dist
+              --source dist \
+              --auth-mode login
 
       - name: Azure logout
         run: az logout
