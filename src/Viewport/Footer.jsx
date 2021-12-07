@@ -23,7 +23,6 @@ const iconArray = [
     { title: <Instagram sx={{ color: 'white' }} /> },
     { title: <YouTube sx={{ color: 'white' }} /> },
     { title: <LinkedIn sx={{ color: 'white' }} /> },
-
 ]
 
 export const Footer = () => {
@@ -40,7 +39,9 @@ export const Footer = () => {
                             {item.title}
                         </Button>
                     )}
-                    <img alt="" src='https://shielded.co.nz/img/custom-logo.png' />
+                    <IconButton size="small">
+                        <img width="45" alt="" src='https://shielded.co.nz/img/custom-logo.png' />
+                    </IconButton>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
                     {iconArray.map((item, i) =>
