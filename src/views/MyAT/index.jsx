@@ -24,7 +24,7 @@ export const MyAT = () => {
                         <Button sx={{ height: '2rem' }} variant="contained" endIcon={<PersonIcon />}>My details</Button>
                     </Box>
                     <Typography variant="subtitle1" >Hello {location.state}</Typography>
-                    <Grid container>
+                    <Grid spacing={4} container>
                         <Grid item xs={12} md={5} >
                             <Box sx={{ backgroundColor: 'grey.100', px: 5, py: 2, mt: 2 }}>
                                 <Typography sx={{ my: 1, color: 'primary.main' }} variant="h2">My AT HOP Cards</Typography>
@@ -39,6 +39,19 @@ export const MyAT = () => {
                                     <Button fullWidth variant="outlined">Top up in person</Button>
                                     <Typography sx={{ my: 1 }} variant="body2"> You’ll need to top up in person for instant access</Typography>
                                     <Divider />
+                                </Card>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} md={5} >
+                            <Box sx={{ backgroundColor: 'grey.100', px: 5, py: 2, mt: 2 }}>
+                                <Typography sx={{ my: 1, color: 'primary.main' }} variant="h2">AT Park</Typography>
+                                <Card sx={{ p: 2 }}>
+                                    <Typography sx={{ my: 1 }} variant="h4">Pay as you go parking</Typography>
+                                    <Button variant="contained" sx={{ my: 1 }} >Manage account </Button>
+                                    <Divider />
+                                    <Typography sx={{ my: 1 }} variant="h4">Parking permits</Typography>
+                                    <Typography sx={{ my: 1 }} variant="body2"> Apply for and manage your parking permits.</Typography>
+                                    <Button variant="contained" sx={{ my: 1 }} >Parking permits</Button>
                                 </Card>
                             </Box>
                         </Grid>

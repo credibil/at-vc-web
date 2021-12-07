@@ -64,7 +64,6 @@ export const Profile = () => {
                 <>
                     <Box sx={{ paddingTop: 5, typography: 'h3', mb: 2, display: 'flex', justifyContent: 'center' }}> {`${location.state}`}</Box>
                     <Card sx={{ p: 1.5, mt: 5, width: { md: '30%' } }}>
-
                         <Typography sx={{ textAlign: 'center', mt: 2 }} gutterBottom variant='h4'>
                             Scan this image using Microsoft Authenticator
                         </Typography>
