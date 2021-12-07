@@ -99,7 +99,7 @@ jobs:
               --account-name stperdx  \
               --auth-mode key \
               --destination '$web' \
-              --source ./dist
+              --source dist
 
       - name: Azure logout
         run: az logout
