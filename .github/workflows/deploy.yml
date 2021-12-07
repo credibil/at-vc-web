@@ -17,7 +17,7 @@ env:
 
 jobs:
   # ----------------------------------------------------
-  # Build React app. Only runs if [tag:patch|minor|major] 
+  # Build React app. Only runs if [tag:patch|minor|major]
   # is found in commit message.
   # ----------------------------------------------------
   build:
