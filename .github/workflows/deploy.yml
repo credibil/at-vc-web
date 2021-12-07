@@ -68,24 +68,6 @@ jobs:
       - name: Test build
         run: npm run test --if-present
 
-      - name: Create release
-        uses: actions/github-script@v5
-        with:
-          script: |
-            github.rest.repos.createRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag_name: "${{ steps.version.outputs.version_tag }}"
-            })
-
-  # ----------------------------------------------------
-  # Deploy build
-  # ----------------------------------------------------
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
       - name: Azure Login
         uses: azure/login@v1
         with:
@@ -104,3 +86,13 @@ jobs:
       - name: Azure logout
         run: az logout
         if: always()
+        
+      - name: Create release
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: "${{ steps.version.outputs.version_tag }}"
+            })
