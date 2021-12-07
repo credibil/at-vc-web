@@ -24,7 +24,7 @@ export const MyAT = () => {
                         <Button sx={{ height: '2rem' }} variant="contained" endIcon={<PersonIcon />}>My details</Button>
                     </Box>
                     <Typography variant="subtitle1" >Hello {location.state}</Typography>
-                    <Grid spacing={4} container>
+                    <Grid spacing={4} container sx={{ pb: 2 }}>
                         <Grid item xs={12} md={5} >
                             <Box sx={{ backgroundColor: 'grey.100', px: 5, py: 2, mt: 2 }}>
                                 <Typography sx={{ my: 1, color: 'primary.main' }} variant="h2">My AT HOP Cards</Typography>
