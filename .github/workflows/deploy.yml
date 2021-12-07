@@ -16,7 +16,7 @@ jobs:
   # Build React app. Only runs if [tag:patch|minor|major]
   # is found in commit message.
   # ----------------------------------------------------
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -77,16 +77,22 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
+            az storage blob delete-batch \
+              --account-name stperdx \
+              --source '$web' \
+              --pattern '*'
+
+            # --auth-mode login
+
             az storage blob upload-batch \
               --account-name stperdx  \
-              --auth-mode key \
               --destination '$web' \
               --source dist
 
       - name: Azure logout
         run: az logout
         if: always()
-        
+
       - name: Create release
         uses: actions/github-script@v5
         with:
